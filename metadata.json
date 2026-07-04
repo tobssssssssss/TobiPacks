@@ -1,0 +1,6 @@
+{
+  "name": "TobiPack",
+  "description": "A high-fidelity TobiPack clone featuring pre-installed PC games, search filters, detail overlays, system requirements, direct downloads, FAQs, and an AI-powered portal to search and generate download options for any game in existence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
