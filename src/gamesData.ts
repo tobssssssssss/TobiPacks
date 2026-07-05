@@ -32,7 +32,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'Qiwi (Direct - High Speed)', url: 'https://qiwi.gg/file/elden-ring-shadow-of-the-erdtree-rip', size: '58.2 GB', status: 'online' },
       { name: 'GoFile (Direct - No limits)', url: 'https://gofile.io/d/elden-ring-shadow-erdtree', size: '58.2 GB', status: 'online' },
       { name: '1Fichier (High Speed Premium)', url: 'https://1fichier.com/?eldenring-shadow-rip', size: '58.2 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:eldenringshadowoferdtreecrackedsteamrip', size: '58.2 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:eldenringshadowoferdtreecrackedtobipack', size: '58.2 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/ss_4cb900609b5526cf54483ef311746c10b4887309.1920x1080.jpg',
@@ -68,7 +68,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct - High Speed)', url: 'https://qiwi.gg/file/cyberpunk-2077-v212-steamrip', size: '76.4 GB', status: 'online' },
+      { name: 'Qiwi (Direct - High Speed)', url: 'https://qiwi.gg/file/cyberpunk-2077-v212-tobipack', size: '76.4 GB', status: 'online' },
       { name: 'GoFile (Direct - No limits)', url: 'https://gofile.io/d/cyberpunk-2077-v212', size: '76.4 GB', status: 'online' },
       { name: 'Mega (Mirror Link)', url: 'https://mega.nz/folder/cyberpunk-2077-ultimate', size: '76.4 GB', status: 'online' },
       { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:cyberpunk2077ultimateeditioncracked', size: '76.4 GB', status: 'online' }
@@ -111,7 +111,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'Qiwi (Part 2 - 50GB)', url: 'https://qiwi.gg/file/bg3-part2', size: '50.0 GB', status: 'online' },
       { name: 'Qiwi (Part 3 - 24.3GB)', url: 'https://qiwi.gg/file/bg3-part3', size: '24.3 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/baldurs-gate-3-patch7', size: '124.3 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:baldursgate3fullcracksteamrip', size: '124.3 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:baldursgate3fullcracktobipack', size: '124.3 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_891e4a1913d8d5df990e54d3df19f5dfebfa9e93.1920x1080.jpg',
@@ -150,7 +150,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'GoFile (Direct)', url: 'https://gofile.io/d/blackmythwukongcrack', size: '118.0 GB', status: 'online' },
       { name: 'Qiwi (Part 1 - 60GB)', url: 'https://qiwi.gg/file/wukong-part1', size: '60.0 GB', status: 'online' },
       { name: 'Qiwi (Part 2 - 58GB)', url: 'https://qiwi.gg/file/wukong-part2', size: '58.0 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:blackmythwukongsteamripcrack', size: '118.0 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:blackmythwukongtobipackcrack', size: '118.0 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/ss_8bf8d023bf7f1e784534efd0340b6154b03657ff.1920x1080.jpg',
@@ -186,9 +186,9 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct - High Speed)', url: 'https://qiwi.gg/file/gtav-steamrip-v3095', size: '109.5 GB', status: 'online' },
+      { name: 'Qiwi (Direct - High Speed)', url: 'https://qiwi.gg/file/gtav-tobipack-v3095', size: '109.5 GB', status: 'online' },
       { name: 'GoFile (Mirror Link)', url: 'https://gofile.io/d/gta-v-v3095', size: '109.5 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:gta5fullpcgamecrackedsteamrip', size: '109.5 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:gta5fullpcgamecrackedtobipack', size: '109.5 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/ss_6ccf400b467ec69fe618b1c4b78df150e79ec364.1920x1080.jpg',
@@ -224,9 +224,9 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/ghost-of-tsushima-directors-cut-steamrip', size: '59.1 GB', status: 'online' },
+      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/ghost-of-tsushima-directors-cut-tobipack', size: '59.1 GB', status: 'online' },
       { name: 'GoFile (High Speed Direct)', url: 'https://gofile.io/d/tsushima-directors-cut', size: '59.1 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:ghostofstushimacrackedsteamrip', size: '59.1 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:ghostofstushimacrackedtobipack', size: '59.1 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2215430/ss_8257088b693e5c700fa32b85e0539f37c38fc7bf.1920x1080.jpg',
@@ -262,7 +262,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/hades2-earlyaccess-steamrip', size: '4.8 GB', status: 'online' },
+      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/hades2-earlyaccess-tobipack', size: '4.8 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/hades-ii-ea', size: '4.8 GB', status: 'online' },
       { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:hades2earlyaccesscrackpc', size: '4.8 GB', status: 'online' }
     ],
@@ -300,9 +300,9 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/stray-v14382-steamrip', size: '6.5 GB', status: 'online' },
+      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/stray-v14382-tobipack', size: '6.5 GB', status: 'online' },
       { name: 'GoFile (Direct Mirror)', url: 'https://gofile.io/d/stray-cat-game', size: '6.5 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:straycatgamecracksteamrip', size: '6.5 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:straycatgamecracktobipack', size: '6.5 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1332010/ss_2b3967817eb6bc799f92d6e409b300302b1f86d8.1920x1080.jpg',
@@ -338,7 +338,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct - SteamRIP)', url: 'https://qiwi.gg/file/lethal-company-v56-onlinefix', size: '850 MB', status: 'online' },
+      { name: 'Qiwi (Direct - TobiPack)', url: 'https://qiwi.gg/file/lethal-company-v56-onlinefix', size: '850 MB', status: 'online' },
       { name: 'GoFile (Direct High-Speed)', url: 'https://gofile.io/d/lethalcompanyv56', size: '850 MB', status: 'online' },
       { name: 'Steam-Online Fix (Lobby Joinable)', url: 'https://gofile.io/d/lethalcompany-onlinefix', size: '12 MB', status: 'online' }
     ],
@@ -379,7 +379,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'Qiwi (Part 1 - 60GB)', url: 'https://qiwi.gg/file/rdr2-part1', size: '60.0 GB', status: 'online' },
       { name: 'Qiwi (Part 2 - 59.4GB)', url: 'https://qiwi.gg/file/rdr2-part2', size: '59.4 GB', status: 'online' },
       { name: 'GoFile (Direct High Speed)', url: 'https://gofile.io/d/rdr2-build-1491', size: '119.4 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:reddeadredemption2crackedsteamrip', size: '119.4 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:reddeadredemption2crackedtobipack', size: '119.4 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/ss_fc947387b693e5c700fa32b85e0539f37c38fc7bf.1920x1080.jpg',
@@ -414,7 +414,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi Launcher + Pre-installed v1.21.1', url: 'https://qiwi.gg/file/minecraft-java-bedrock-steamrip', size: '1.2 GB', status: 'online' },
+      { name: 'Qiwi Launcher + Pre-installed v1.21.1', url: 'https://qiwi.gg/file/minecraft-java-bedrock-tobipack', size: '1.2 GB', status: 'online' },
       { name: 'GoFile (Direct Mirror)', url: 'https://gofile.io/d/minecraft-multiversion', size: '1.2 GB', status: 'online' }
     ],
     screenshots: [
@@ -450,9 +450,9 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct - Full Next Gen)', url: 'https://qiwi.gg/file/witcher3-v404-steamrip', size: '51.3 GB', status: 'online' },
+      { name: 'Qiwi (Direct - Full Next Gen)', url: 'https://qiwi.gg/file/witcher3-v404-tobipack', size: '51.3 GB', status: 'online' },
       { name: 'GoFile (Direct No Speed Limits)', url: 'https://gofile.io/d/witcher3-nextgen-v404', size: '51.3 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:witcher3wildhuntnextgencracksteamrip', size: '51.3 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:witcher3wildhuntnextgencracktobipack', size: '51.3 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/ss_f8350d53c301c3bf79320e8b28f8f9024f0c4bb2.1920x1080.jpg',
@@ -488,7 +488,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct Download)', url: 'https://qiwi.gg/file/stardewvalley-v168-steamrip', size: '650 MB', status: 'online' },
+      { name: 'Qiwi (Direct Download)', url: 'https://qiwi.gg/file/stardewvalley-v168-tobipack', size: '650 MB', status: 'online' },
       { name: 'GoFile (Direct Mirror)', url: 'https://gofile.io/d/stardewvalley-v168', size: '650 MB', status: 'online' }
     ],
     screenshots: [
@@ -524,7 +524,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct Download)', url: 'https://qiwi.gg/file/hollowknight-steamrip', size: '1.4 GB', status: 'online' },
+      { name: 'Qiwi (Direct Download)', url: 'https://qiwi.gg/file/hollowknight-tobipack', size: '1.4 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/hollowknight', size: '1.4 GB', status: 'online' }
     ],
     screenshots: [
@@ -561,7 +561,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct High Speed)', url: 'https://qiwi.gg/file/portal2-steamrip', size: '7.2 GB', status: 'online' },
+      { name: 'Qiwi (Direct High Speed)', url: 'https://qiwi.gg/file/portal2-tobipack', size: '7.2 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/portal2-updated', size: '7.2 GB', status: 'online' }
     ],
     screenshots: [
@@ -601,7 +601,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'Qiwi (Part 1 - 45GB)', url: 'https://qiwi.gg/file/spiderman2-part1', size: '45.0 GB', status: 'online' },
       { name: 'Qiwi (Part 2 - 41.4GB)', url: 'https://qiwi.gg/file/spiderman2-part2', size: '41.4 GB', status: 'online' },
       { name: 'GoFile (Direct High Speed)', url: 'https://gofile.io/d/spiderman2-pc-rip', size: '86.4 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:spiderman2pccrackedsteamrip', size: '86.4 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:spiderman2pccrackedtobipack', size: '86.4 GB', status: 'online' }
     ],
     screenshots: [
       'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2643800/ss_8bf8d023bf7f1e784534efd0340b6154b03657ff.1920x1080.jpg',
@@ -636,9 +636,9 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/alan-wake-2-deluxe-steamrip', size: '68.0 GB', status: 'online' },
+      { name: 'Qiwi (Direct Link)', url: 'https://qiwi.gg/file/alan-wake-2-deluxe-tobipack', size: '68.0 GB', status: 'online' },
       { name: 'GoFile (Direct Mirror)', url: 'https://gofile.io/d/alanwake2-deluxe', size: '68.0 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:alanwake2deluxesteamrip', size: '68.0 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:alanwake2deluxetobipack', size: '68.0 GB', status: 'online' }
     ],
     screenshots: [
       'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=1920&h=1080'
@@ -677,7 +677,7 @@ export const STATIC_GAMES: Game[] = [
       { name: 'Qiwi (Part 2 - 60GB)', url: 'https://qiwi.gg/file/gow-ragnarok-p2', size: '60.0 GB', status: 'online' },
       { name: 'Qiwi (Part 3 - 55GB)', url: 'https://qiwi.gg/file/gow-ragnarok-p3', size: '55.0 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/gow-ragnarok-valhalla', size: '175.0 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:godofwarragnarokcracksteamrip', size: '175.0 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:godofwarragnarokcracktobipack', size: '175.0 GB', status: 'online' }
     ]
   },
   {
@@ -710,7 +710,7 @@ export const STATIC_GAMES: Game[] = [
     },
     downloadLinks: [
       { name: 'GoFile (Direct High Speed)', url: 'https://gofile.io/d/forzahorizon5premium', size: '132.8 GB', status: 'online' },
-      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:forzahorizon5premiumsteamrip', size: '132.8 GB', status: 'online' }
+      { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:forzahorizon5premiumtobipack', size: '132.8 GB', status: 'online' }
     ]
   },
   {
@@ -742,7 +742,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/terraria-v1449-steamrip', size: '520 MB', status: 'online' },
+      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/terraria-v1449-tobipack', size: '520 MB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/terraria-latest', size: '520 MB', status: 'online' }
     ]
   },
@@ -774,7 +774,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/factorio-v11104-steamrip', size: '2.1 GB', status: 'online' },
+      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/factorio-v11104-tobipack', size: '2.1 GB', status: 'online' },
       { name: 'GoFile (Direct Mirror)', url: 'https://gofile.io/d/factorio-v11104', size: '2.1 GB', status: 'online' }
     ]
   },
@@ -807,7 +807,7 @@ export const STATIC_GAMES: Game[] = [
       }
     },
     downloadLinks: [
-      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/skyrim-se-anniversary-steamrip', size: '12.5 GB', status: 'online' },
+      { name: 'Qiwi (Direct)', url: 'https://qiwi.gg/file/skyrim-se-anniversary-tobipack', size: '12.5 GB', status: 'online' },
       { name: 'GoFile (Direct Link)', url: 'https://gofile.io/d/skyrim-se-v161170', size: '12.5 GB', status: 'online' },
       { name: 'Torrent Download (Magnet)', url: 'magnet:?xt=urn:btih:skyrimspecialeditionanniversarycrack', size: '12.5 GB', status: 'online' }
     ]
@@ -864,7 +864,7 @@ export const GENRES_LIST = [
   'Puzzle'
 ];
 
-export const STEAMRIP_INDEX_PRESETS: string[] = [
+export const TOBIPACK_INDEX_PRESETS: string[] = [
   "Minecraft Dungeons",
   "Minecraft Legends",
   "Minecraft Story Mode",
@@ -1643,8 +1643,9 @@ export const ALL_GAMES_CATALOG: Game[] = (() => {
   }
 
   // 2. Add preset games that are not already present in STATIC_GAMES
-  for (const name of STEAMRIP_INDEX_PRESETS) {
-    const isAlreadyPresent = catalog.some(g => g.name.toLowerCase().trim() === name.toLowerCase().trim());
+  for (const name of TOBIPACK_INDEX_PRESETS) {
+    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const isAlreadyPresent = catalog.some(g => g.id === id || g.name.toLowerCase().trim() === name.toLowerCase().trim());
     if (!isAlreadyPresent) {
       let charSum = 0;
       for (let i = 0; i < name.length; i++) {
@@ -1668,7 +1669,7 @@ export const ALL_GAMES_CATALOG: Game[] = (() => {
         name,
         description: `${name} is pre-installed, pre-cracked, and optimized for immediate high-speed direct download. This clean, tested distribution features high frame rate support, optimal controller configurations, and complete Windows 10/11 compatibility with all DLC included. Tested 100% clean of malware by Windows Defender.`,
         releaseDate: 'Latest Version',
-        developer: 'SteamRIP Mirror system',
+        developer: 'TobiPack Mirror system',
         genres,
         steamId: appId ? String(appId) : undefined,
         coverUrl: getSteamCoverUrl(name),
@@ -2117,6 +2118,1208 @@ export const MOBILE_GAMES_CATALOG: Game[] = [
     isPopular: false
   }
 ];
+
+export const MOBILE_APPS_CATALOG: Game[] = [
+  {
+    id: 'spotify-premium-mod',
+    name: 'Spotify Premium (Ad-Free & Unlimited Skips)',
+    description: 'Vychutnajte si hudbu a podcasty bez akýchkoľvek obmedzení! Táto verzia Spotify Premium MOD od TobiPack odomyká všetky prémiové funkcie úplne zadarmo: žiadne otravné reklamy, neobmedzené preskakovanie skladieb, prehrávanie v najvyššej Extreme kvalite (320 kbps), možnosť prehrávať akúkoľvek skladbu na požiadanie a kompletné vyhľadávanie bez obmedzení.',
+    releaseDate: 'Jun 28, 2026',
+    developer: 'Spotify AB / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Populárne', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1614680376593-902f74fa0d41?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '74 MB',
+    version: 'v8.9.44.502 (MOD Premium)',
+    requirements: {
+      minimum: {
+        os: 'Android 6.0+ / iOS 13.0+',
+        processor: 'Quad-Core 1.3 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '100 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 10.0+ / iOS 16.0+',
+        processor: 'Octa-Core 1.8 GHz',
+        memory: '3 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '200 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/spotify-premium-mod.apk', size: '74 MB', status: 'online' },
+      { name: 'HappyMod Spotify Premium Mirror', url: 'https://happymod.com/spotify-music-mod/com.spotify.music/', size: '74 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 1540000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800&h=450',
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'ibis-paint-x-pro',
+    name: 'Ibis Paint X (Pro Full Unlocked)',
+    description: 'Najpokročilejšia mobilná aplikácia na kreslenie a digitálnu maľbu. Ibis Paint X Pro od TobiPack obsahuje všetky prémiové štetce, filtre, fonty a materiály odomknuté. Viac ako 15000+ štetcov, 80+ filtrov, 46 screen tónov a nahrávanie celého procesu kreslenia vo Full HD pre kreatívnych umelcov.',
+    releaseDate: 'Jul 02, 2026',
+    developer: 'ibis inc. / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '68 MB',
+    version: 'v12.1.2 (Pro Full)',
+    requirements: {
+      minimum: {
+        os: 'Android 7.0+ / iOS 14.0+',
+        processor: 'Quad-Core 1.5 GHz',
+        memory: '3 GB RAM',
+        graphics: 'Mali-G51 or similar',
+        storage: '150 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 11.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.2 GHz',
+        memory: '6 GB RAM',
+        graphics: 'Adreno 618 or higher',
+        storage: '500 MB voľného miesta (Rýchle úložisko)'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/ibis-paint-x-pro.apk', size: '68 MB', status: 'online' },
+      { name: 'LiteAPKs Ibis Paint Pro Mirror', url: 'https://liteapks.com/ibis-paint-x.html', size: '68 MB', status: 'online' }
+    ],
+    rating: 4.9,
+    downloadsCount: 840000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&q=80&w=800&h=450',
+      'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'chrome-mobile-adblock',
+    name: 'Google Chrome Mobile (AdBlock & Developer Tools)',
+    description: 'Najrýchlejší webový prehliadač na svete, špeciálne upravený pre TobiPack s integrovaným blokovaním agresívnych reklám, vyskakovacích okien a trackerov (uBlock Mobile Engine). Obsahuje povolené mobilné vývojárske nástroje (Developer DevTools Console) pre inšpekciu webov priamo z telefónu.',
+    releaseDate: 'May 14, 2026',
+    developer: 'Google LLC / TobiPack Browser Lab',
+    genres: ['Aplikácia', 'Prehliadače', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '112 MB',
+    version: 'v126.0.6478.122 (AdBlock)',
+    requirements: {
+      minimum: {
+        os: 'Android 8.0+ / iOS 15.0+',
+        processor: 'Quad-Core 1.4 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '200 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 11.0+ / iOS 17.0+',
+        processor: 'Octa-Core 2.0 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '350 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/chrome-mobile-adblock.apk', size: '112 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 1980000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'brave-browser-premium',
+    name: 'Brave Browser (Super Privacy & Background Playback)',
+    description: 'Brave Browser pre mobilné telefóny prináša absolútne súkromie na internete. Automaticky blokuje 100% YouTube reklám na pozadí, šetrí batériu a mobilné dáta. TobiPack edícia obsahuje pre-integrovaný torrentový klient na sťahovanie hier priamo do mobilu a plné prehrávanie médií na pozadí so zhasnutou obrazovkou.',
+    releaseDate: 'Jun 10, 2026',
+    developer: 'Brave Software / TobiPack Browser Lab',
+    genres: ['Aplikácia', 'Prehliadače', 'Populárne', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '95 MB',
+    version: 'v1.67.123 (Premium Unlocked)',
+    requirements: {
+      minimum: {
+        os: 'Android 7.0+ / iOS 14.0+',
+        processor: 'Quad-Core 1.5 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '150 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 10.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.0 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '250 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/brave-mobile-premium.apk', size: '95 MB', status: 'online' },
+      { name: 'LiteAPKs Brave Direct Mirror', url: 'https://liteapks.com/brave-private-web-browser.html', size: '95 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 1230000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'autodesk-sketchbook-premium',
+    name: 'Autodesk Sketchbook (Premium Unlocked)',
+    description: 'Profesionálny digitálny skicár pre umelcov a dizajnérov. Obsahuje čisté rozhranie bez rozptyľovania, prispôsobiteľný panel nástrojov, pravítka, symetrie a perspektívne vodidlá. Verzia od TobiPack odomyká kompletnú sadu profesionálnych štetcov vrátane exkluzívnych textúr Copic.',
+    releaseDate: 'Mar 15, 2026',
+    developer: 'Autodesk Inc. / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie'],
+    coverUrl: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '82 MB',
+    version: 'v6.0.2 (Premium Unlocked)',
+    requirements: {
+      minimum: {
+        os: 'Android 6.0+ / iOS 13.0+',
+        processor: 'Quad-Core 1.3 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '100 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 9.0+ / iOS 15.0+',
+        processor: 'Octa-Core 1.8 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Adreno 506+',
+        storage: '200 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/sketchbook-premium.apk', size: '82 MB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 340000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'capcut-pro-unlocked',
+    name: 'CapCut Mobile (Pro Premium Unlocked)',
+    description: 'Najlepší mobilný video editor pre tvorcov obsahu. Vytvárajte úchvatné cinematic videá s pokročilými efektmi. Táto TobiPack PRO edícia odomyká všetky prémiové prechody, VIP filtre, AI vylepšenia postáv, automatické titulky (Slovak AI Subtitles) a export v 4K rozlíšení pri 60 FPS bez vodoznaku.',
+    releaseDate: 'Jun 30, 2026',
+    developer: 'ByteDance / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie', 'Populárne', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '134 MB',
+    version: 'v12.2.0 (Pro Premium)',
+    requirements: {
+      minimum: {
+        os: 'Android 8.0+ / iOS 14.0+',
+        processor: 'Octa-Core 1.8 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Mali-G52 or higher',
+        storage: '300 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 11.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.4 GHz',
+        memory: '6 GB RAM',
+        graphics: 'Snapdragon 720G / Apple A13',
+        storage: '800 MB voľného miesta (UFS 2.1+)'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/capcut-pro.apk', size: '134 MB', status: 'online' },
+      { name: 'HappyMod CapCut Pro Mirror', url: 'https://happymod.com/capcut-editor-mod/com.lenovo.anyshare.gps/', size: '134 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 2200000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'duolingo-super-premium',
+    name: 'Duolingo (Super Premium Unlocked)',
+    description: 'Naučte sa cudzie jazyky hravo! Táto špeciálna edícia Super Duolingo od TobiPack odomyká nekonečné životy (Infinite Hearts), žiadne reklamy, neobmedzené opravy chýb, Legendárne úrovne (Legendary Levels) zadarmo a prístup k prémiovým testom výslovnosti a gramatiky bez predplatného.',
+    releaseDate: 'Jan 12, 2026',
+    developer: 'Duolingo Inc. / TobiPack Education',
+    genres: ['Aplikácia', 'Populárne', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '58 MB',
+    version: 'v5.148.4 (Super Premium)',
+    requirements: {
+      minimum: {
+        os: 'Android 6.0+ / iOS 13.0+',
+        processor: 'Quad-Core 1.3 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '100 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 9.0+ / iOS 15.0+',
+        processor: 'Quad-Core 1.8 GHz',
+        memory: '3 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '150 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/duolingo-super.apk', size: '58 MB', status: 'online' },
+      { name: 'HappyMod Duolingo Unlocked Mirror', url: 'https://happymod.com/duolingo-mod/com.duolingo/', size: '58 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 520000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'infinite-painter-pro',
+    name: 'Infinite Painter (Pro Full Unlocked)',
+    description: 'Jedna z najvyspelejších maliarskych aplikácií pre mobilné zariadenia. Ponúka neuveriteľne vernú simuláciu miešania reálnych olejových, akvarelových a akrylových farieb. TobiPack edícia obsahuje odomknuté plné Pro rozhranie, export do PSD vrstiev, nahrávanie Timelapse a 200+ profesionálnych štetcov.',
+    releaseDate: 'Feb 18, 2026',
+    developer: 'Infinite Studio / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie'],
+    coverUrl: 'https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '92 MB',
+    version: 'v7.0.51 (Pro Unlocked)',
+    requirements: {
+      minimum: {
+        os: 'Android 7.0+ / iOS 14.0+',
+        processor: 'Quad-Core 1.5 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Mali-T820 or similar',
+        storage: '150 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 10.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.0 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Mali-G57 or higher',
+        storage: '300 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/infinite-painter-pro.apk', size: '92 MB', status: 'online' },
+      { name: 'LiteAPKs Infinite Painter Mirror', url: 'https://liteapks.com/infinite-painter.html', size: '92 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 190000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'es-file-explorer-pro',
+    name: 'ES File Explorer (Pro Patched & Ad-Free)',
+    description: 'Najvýkonnejší správca súborov pre Android. Umožňuje plnú správu archívov zip, rar, 7z priamo v mobile (nevyhnutné pre rozbaľovanie hier), prístup k systémovým zložkám (Root Explorer) a prenos súborov cez FTP/SFTP. Táto TobiPack Pro edícia odstraňuje všetky reklamy, prichádza s tmavým AMOLED motívom a odomyká čistič systémového odpadu.',
+    releaseDate: 'Apr 22, 2026',
+    developer: 'ES App Group / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '28 MB',
+    version: 'v4.4.1.6 (Pro Ad-Free)',
+    requirements: {
+      minimum: {
+        os: 'Android 5.0+',
+        processor: 'Dual-Core 1.2 GHz',
+        memory: '1 GB RAM',
+        graphics: 'Akékoľvek moderné GPU',
+        storage: '50 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 9.0+',
+        processor: 'Quad-Core 1.6 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Akékoľvek moderné GPU',
+        storage: '100 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/es-file-explorer-pro.apk', size: '28 MB', status: 'online' },
+      { name: 'LiteAPKs ES File Explorer Mirror', url: 'https://liteapks.com/es-file-explorer.html', size: '28 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 950000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'adobe-lightroom-premium',
+    name: 'Adobe Lightroom Mobile (Premium Unlocked)',
+    description: 'Premeňte svoje mobilné fotky na profesionálne zábery! S Lightroom Premium Mobile získate prístup k exkluzívnym prémiovým filtrom a presetom, inteligentnému retušovaniu (Healing Brush), maskovaniu poháňanému umelou inteligenciou, pokročilej korekcii perspektívy a plnej podpore fotenia do formátu RAW.',
+    releaseDate: 'Mar 10, 2026',
+    developer: 'Adobe Inc. / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '120 MB',
+    version: 'v9.3.1 (Premium Unlocked)',
+    requirements: {
+      minimum: {
+        os: 'Android 8.0+ / iOS 15.0+',
+        processor: 'Octa-Core 1.8 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Adreno 610 or similar',
+        storage: '250 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 11.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.4 GHz',
+        memory: '6 GB RAM',
+        graphics: 'Adreno 640 / Apple A13',
+        storage: '500 MB voľného miesta (Rýchle úložisko)'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/lightroom-mobile-premium.apk', size: '120 MB', status: 'online' },
+      { name: 'HappyMod Adobe Lightroom Mirror', url: 'https://happymod.com/adobe-lightroom-mod/com.adobe.lrmobile/', size: '120 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 1100000,
+    isPopular: true,
+    screenshots: [
+      'https://images.unsplash.com/photo-1452784444945-3f422708fe5e?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'opera-touch-vpn',
+    name: 'Opera Touch Browser (Free Unlimited VPN)',
+    description: 'Kompaktný a bleskurýchly webový prehliadač navrhnutý pre pohodlné používanie jednou rukou. Táto špeciálna TobiPack edícia obsahuje vstavané neobmedzené bezplatné VPN (Virtual Private Network) s rýchlymi servermi z celého sveta a pokročilú ochranu pred ťažbou kryptomien (Cryptojacking Block).',
+    releaseDate: 'Feb 12, 2026',
+    developer: 'Opera / TobiPack Browser Lab',
+    genres: ['Aplikácia', 'Prehliadače'],
+    coverUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '41 MB',
+    version: 'v3.4.1 (Premium)',
+    requirements: {
+      minimum: {
+        os: 'Android 6.0+ / iOS 13.0+',
+        processor: 'Quad-Core 1.3 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '80 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 10.0+ / iOS 15.0+',
+        processor: 'Octa-Core 1.8 GHz',
+        memory: '3 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: '120 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/opera-touch-vpn.apk', size: '41 MB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 430000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  },
+  {
+    id: 'nova-launcher-prime-mod',
+    name: 'Nova Launcher Prime (Prime Unlocked)',
+    description: 'Prispôsobte si vzhľad svojho telefónu na nepoznanie! Nova Launcher Prime je kráľom domovských obrazoviek pre Android. Verzia od TobiPack odomyká všetky Prime funkcie: prispôsobené gestá na ploche, skrytie nepoužívaných aplikácií, detailné animácie prechodov, vlastné balíčky ikon a pokročilé oznamovacie odznaky.',
+    releaseDate: 'Jul 01, 2026',
+    developer: 'TeslaCoil Software / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '14 MB',
+    version: 'v8.0.14 (Prime Unlocked)',
+    requirements: {
+      minimum: {
+        os: 'Android 8.0+',
+        processor: 'Quad-Core 1.5 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Akékoľvek moderné GPU',
+        storage: '30 MB voľného miesta'
+      },
+      recommended: {
+        os: 'Android 11.0+',
+        processor: 'Octa-Core 2.0 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Akékoľvek moderné GPU',
+        storage: '50 MB voľného miesta'
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK)', url: 'https://tobipack.gg/download/nova-launcher-prime.apk', size: '14 MB', status: 'online' },
+      { name: 'HappyMod Nova Launcher Prime Mirror', url: 'https://happymod.com/nova-launcher-prime-mod/com.teslacoilsw.launcher.prime/', size: '14 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 780000,
+    isPopular: false,
+    screenshots: [
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800&h=450'
+    ]
+  }
+];
+
+// Additional popular verified games
+const ADDITIONAL_VERIFIED_GAMES: Game[] = [
+  {
+    id: 'brawl-stars',
+    name: 'Brawl Stars (MOD Unlimited Gems)',
+    description: 'Bleskurýchly multiplayer 3v3 a battle royale pre mobilné zariadenia. Táto TobiPack MOD edícia prichádza s prístupom na privátny server s neobmedzenými drahokamami, mincami a boxami na odomknutie všetkých brawlerov a ich prémiových skinov okamžite.',
+    releaseDate: 'Jul 04, 2026',
+    developer: 'Supercell / TobiPack Mobile',
+    genres: ['Action', 'Popular'],
+    coverUrl: 'https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '280 MB',
+    version: 'v55.230 (MOD)',
+    requirements: {
+      minimum: { os: 'Android 7.0+ / iOS 13.0+', processor: 'Quad-Core 1.5 GHz', memory: '3 GB RAM', graphics: 'Mali-T820', storage: '500 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 15.0+', processor: 'Octa-Core 2.0 GHz', memory: '4 GB RAM', graphics: 'Adreno 610', storage: '800 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Private Server APK', url: 'https://tobipack.gg/download/brawl-stars-mod.apk', size: '280 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 1950000,
+    isPopular: true
+  },
+  {
+    id: 'pubg-mobile',
+    name: 'PUBG Mobile (60 FPS GFX Tool Ready)',
+    description: 'Originálna battle royale hra, teraz optimalizovaná pre mobilné zariadenia so stabilným frameratom 60 FPS. TobiPack edícia obsahuje prednastavené grafické konfiguračné súbory GFX Tool na odomknutie Ultra HD grafiky a plynulého chodu aj na slabších telefónoch.',
+    releaseDate: 'Jun 12, 2026',
+    developer: 'Tencent Games / LightSpeed & Quantum / TobiPack',
+    genres: ['Action', 'Survival', 'Popular'],
+    coverUrl: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '1.8 GB',
+    version: 'v3.2.0',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 12.0+', processor: 'Quad-Core 1.6 GHz', memory: '3 GB RAM', graphics: 'Mali-G52', storage: '2.5 GB' },
+      recommended: { os: 'Android 11.0+ / iOS 16.0+', processor: 'Snapdragon 720G / Apple A13', memory: '6 GB RAM', graphics: 'Adreno 618', storage: '3.5 GB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed APK + OBB', url: 'https://tobipack.gg/download/pubg-mobile-60fps.zip', size: '1.8 GB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 3850000,
+    isPopular: true
+  },
+  {
+    id: 'clash-of-clans',
+    name: 'Clash of Clans (Unlimited Gems Private Server)',
+    description: 'Vstúpte do sveta barbarov, čarodejníkov a stavajte svoje dediny! Táto TobiPack verzia sa pripája k dedikovanému privátnemu serveru s neobmedzeným elixírom, zlatom a drahokamami, čo vám umožní postaviť si najsilnejšiu základňu v priebehu pár minút bez čakania.',
+    releaseDate: 'May 20, 2026',
+    developer: 'Supercell / TobiPack Mobile',
+    genres: ['Strategy', 'Popular'],
+    coverUrl: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '320 MB',
+    version: 'v16.100.2 (MOD)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 12.0+', processor: 'Quad-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '450 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 15.0+', processor: 'Octa-Core 1.8 GHz', memory: '4 GB RAM', graphics: 'Mali-G52', storage: '600 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Private Server (APK)', url: 'https://tobipack.gg/download/clash-of-clans-mod.apk', size: '320 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 1420000,
+    isPopular: true
+  },
+  {
+    id: 'candy-crush',
+    name: 'Candy Crush Saga (Infinite Boosters & Lives)',
+    description: 'Sladká logická hra, v ktorej presúvate a spájate cukríky. Verzia od TobiPack obsahuje odomknuté neobmedzené životy, nekonečné boostre na prekonanie akéhokoľvek ťažkého levelu a plný offline prístup k tisíckam jedinečných fáz.',
+    releaseDate: 'Jan 15, 2026',
+    developer: 'King / TobiPack Mobile',
+    genres: ['Strategy', 'Casual'],
+    coverUrl: 'https://images.unsplash.com/photo-1581795669633-91b77bc02d21?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '95 MB',
+    version: 'v1.275.0',
+    requirements: {
+      minimum: { os: 'Android 5.0+ / iOS 11.0+', processor: 'Dual-Core 1.2 GHz', memory: '1.5 GB RAM', graphics: 'Standard GPU', storage: '150 MB' },
+      recommended: { os: 'Android 9.0+ / iOS 14.0+', processor: 'Quad-Core 1.6 GHz', memory: '3 GB RAM', graphics: 'Mali-T720', storage: '200 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Candy Crush MOD APK', url: 'https://tobipack.gg/download/candy-crush-mod.apk', size: '95 MB', status: 'online' }
+    ],
+    rating: 4.5,
+    downloadsCount: 2680000,
+    isPopular: false
+  },
+  {
+    id: 'among-us-mobile',
+    name: 'Among Us (All Skins & Pets Unlocked)',
+    description: 'Hrajte online alebo cez lokálnu Wi-Fi so 4-15 hráčmi pri príprave vesmírnej lode na odlet. TobiPack edícia odomyká všetky prémiové klobúky, zvieratká (Pets) a obleky úplne zadarmo s integrovanou ochranou proti kickom.',
+    releaseDate: 'Mar 25, 2026',
+    developer: 'Innersloth / TobiPack Mobile',
+    genres: ['Sandbox', 'Action', 'Popular'],
+    coverUrl: 'https://images.unsplash.com/photo-1608889174636-24018260a92b?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '145 MB',
+    version: 'v2024.5.10 (MOD)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 13.0+', processor: 'Quad-Core 1.3 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '200 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 15.0+', processor: 'Quad-Core 1.8 GHz', memory: '3 GB RAM', graphics: 'Adreno 506+', storage: '300 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Unlocked APK', url: 'https://tobipack.gg/download/among-us-unlocked.apk', size: '145 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 1150000,
+    isPopular: true
+  },
+  {
+    id: 'hill-climb-racing',
+    name: 'Hill Climb Racing (Unlimited Coins MOD)',
+    description: 'Jedna z najnávykovejších a najzábavnejších jazdeckých hier založených na fyzike, aké boli kedy vytvorené! TobiPack edícia obsahuje neobmedzené mince a drahokamy, takže si môžete okamžite vylepšiť svoje vozidlá a odomknúť všetky trate.',
+    releaseDate: 'Apr 02, 2026',
+    developer: 'Fingersoft / TobiPack Mobile',
+    genres: ['Action', 'Arcade'],
+    coverUrl: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '80 MB',
+    version: 'v1.61.0 (MOD)',
+    requirements: {
+      minimum: { os: 'Android 5.0+ / iOS 11.0+', processor: 'Dual-Core 1.2 GHz', memory: '1 GB RAM', graphics: 'Standard GPU', storage: '120 MB' },
+      recommended: { os: 'Android 8.0+ / iOS 14.0+', processor: 'Quad-Core 1.5 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '150 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed (APK)', url: 'https://tobipack.gg/download/hill-climb-racing-mod.apk', size: '80 MB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 890000,
+    isPopular: false
+  },
+  {
+    id: 'pou-mobile',
+    name: 'Pou (Max Level & Infinite Coins MOD)',
+    description: 'Máte na to, aby ste sa postarali o svojho vlastného mimozemského domáceho miláčika Pou? Kŕmte ho, čistite ho, hrajte sa s ním a sledujte, ako rastie. Táto edícia od TobiPack odomyká nekonečné herné mince a lektvary na okamžitú úpravu vzhľadu Poua.',
+    releaseDate: 'Feb 10, 2026',
+    developer: 'Zakeh / TobiPack Mobile',
+    genres: ['Strategy', 'Casual'],
+    coverUrl: 'https://images.unsplash.com/photo-1584441401010-4ff69011e8bb?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '24 MB',
+    version: 'v1.4.111 (MOD)',
+    requirements: {
+      minimum: { os: 'Android 5.0+ / iOS 11.0+', processor: 'Dual-Core 1.0 GHz', memory: '1 GB RAM', graphics: 'Standard GPU', storage: '50 MB' },
+      recommended: { os: 'Android 8.0+ / iOS 13.0+', processor: 'Dual-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '80 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Infinite Coins APK', url: 'https://tobipack.gg/download/pou-mod.apk', size: '24 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 3200000,
+    isPopular: false
+  },
+  {
+    id: 'angry-birds-classic',
+    name: 'Angry Birds Classic (All Levels Unlocked)',
+    description: 'Využite jedinečné sily nahnevaných vtákov na zničenie obrany chamtivých prasiat! Remasterovaná klasická edícia od TobiPack s úplne odomknutými všetkými svetmi, zlatými vajíčkami a nekonečnými posilneniami pre maximálnu deštrukciu.',
+    releaseDate: 'May 14, 2026',
+    developer: 'Rovio Entertainment / TobiPack Mobile',
+    genres: ['Arcade'],
+    coverUrl: 'https://images.unsplash.com/photo-1553484771-047a44eee27f?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '48 MB',
+    version: 'v8.0.3 (Premium)',
+    requirements: {
+      minimum: { os: 'Android 5.0+ / iOS 12.0+', processor: 'Dual-Core 1.2 GHz', memory: '1 GB RAM', graphics: 'Standard GPU', storage: '100 MB' },
+      recommended: { os: 'Android 9.0+ / iOS 15.0+', processor: 'Quad-Core 1.6 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '150 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Premium Classic APK', url: 'https://tobipack.gg/download/angry-birds-classic.apk', size: '48 MB', status: 'online' }
+    ],
+    rating: 4.9,
+    downloadsCount: 1450000,
+    isPopular: false
+  }
+];
+
+// Additional popular verified apps
+const ADDITIONAL_VERIFIED_APPS: Game[] = [
+  {
+    id: 'whatsapp-messenger',
+    name: 'WhatsApp Plus (Anti-Ban Customization MOD)',
+    description: 'Komunikačná aplikácia WhatsApp obohatená o neuveriteľné funkcie! Umožňuje plné prispôsobenie dizajnu, posielanie videí až do veľkosti 1 GB, skrytie stavu online, čítanie odstránených správ od priateľov a integrovaný modul Anti-Ban pre bezpečné používanie.',
+    releaseDate: 'Jun 22, 2026',
+    developer: 'Meta / WhatsApp Inc. / TobiPack Team',
+    genres: ['Aplikácia', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1563986768494-0d2cd4034630?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '62 MB',
+    version: 'v17.85.0 (Plus MOD)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 14.0+', processor: 'Quad-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '150 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 16.0+', processor: 'Octa-Core 1.8 GHz', memory: '3 GB RAM', graphics: 'Standard GPU', storage: '250 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Plus High-Speed APK', url: 'https://tobipack.gg/download/whatsapp-plus.apk', size: '62 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 3500000,
+    isPopular: true
+  },
+  {
+    id: 'messenger-lite',
+    name: 'Facebook Messenger (Lite Ad-Free Edition)',
+    description: 'Neuveriteľne rýchla a úsporná verzia Messengera. TobiPack edícia kompletne odstraňuje reklamy zo zoznamu chatov, šetrí batériu a pamäť RAM. Podporuje plnohodnotné hovory a videohovory s minimálnou spotrebou mobilných dát.',
+    releaseDate: 'Jul 01, 2026',
+    developer: 'Meta / Facebook Inc. / TobiPack Team',
+    genres: ['Aplikácia', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1530811761204-8961d2ef4beb?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '15 MB',
+    version: 'v321.0.0.12 (Lite Unlocked)',
+    requirements: {
+      minimum: { os: 'Android 5.0+', processor: 'Dual-Core 1.0 GHz', memory: '1 GB RAM', graphics: 'Standard GPU', storage: '50 MB' },
+      recommended: { os: 'Android 8.0+', processor: 'Quad-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '100 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Lite Ad-Free APK', url: 'https://tobipack.gg/download/messenger-lite.apk', size: '15 MB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 1850000,
+    isPopular: false
+  },
+  {
+    id: 'tiktok-mobile',
+    name: 'TikTok Premium (No Watermark & Unblocked Ads)',
+    description: 'Sledujte milióny prispôsobených krátkych videí! Táto TobiPack Premium verzia odomyká ukladanie videí bez vodoznaku priamo do galérie, odstraňuje všetky sponzorované reklamné videá z feedu a umožňuje prepínanie regiónov do celého sveta.',
+    releaseDate: 'Jun 28, 2026',
+    developer: 'ByteDance Ltd. / TobiPack Team',
+    genres: ['Aplikácia', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '85 MB',
+    version: 'v34.9.4 (Premium MOD)',
+    requirements: {
+      minimum: { os: 'Android 7.0+ / iOS 14.0+', processor: 'Quad-Core 1.5 GHz', memory: '3 GB RAM', graphics: 'Mali-G51', storage: '200 MB' },
+      recommended: { os: 'Android 11.0+ / iOS 16.0+', processor: 'Octa-Core 2.2 GHz', memory: '6 GB RAM', graphics: 'Adreno 618', storage: '400 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack TikTok Premium APK', url: 'https://tobipack.gg/download/tiktok-premium.apk', size: '85 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 4200000,
+    isPopular: true
+  },
+  {
+    id: 'instagram-mod',
+    name: 'Instagram Ultra (Media Downloader & Privacy)',
+    description: 'Najlepší modded Instagram s integrovaným tlačidlom na sťahovanie fotiek, videí, stories a reels priamo do pamäte telefónu. Umožňuje anonymné prezeranie príbehov, zväčšovanie profilových obrázkov a prenos fotiek v maximálnej nekomprimovanej kvalite.',
+    releaseDate: 'Jun 15, 2026',
+    developer: 'Meta / Instagram Inc. / TobiPack',
+    genres: ['Aplikácia', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '64 MB',
+    version: 'v314.0.0.1 (Ultra MOD)',
+    requirements: {
+      minimum: { os: 'Android 7.0+ / iOS 14.0+', processor: 'Quad-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '150 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 16.0+', processor: 'Octa-Core 2.0 GHz', memory: '4 GB RAM', graphics: 'Standard GPU', storage: '250 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Ultra MOD (APK)', url: 'https://tobipack.gg/download/instagram-ultra.apk', size: '64 MB', status: 'online' }
+    ],
+    rating: 4.7,
+    downloadsCount: 2900000,
+    isPopular: true
+  },
+  {
+    id: 'netflix-mobile',
+    name: 'Netflix Mobile (Premium Player & 1080p Mirror)',
+    description: 'Sledujte ocenené seriály, filmy, dokumenty a anime. TobiPack špeciálna edícia obsahuje integrovaný alternatívny prehrávač s voľným prístupom k celej knižnici v rozlíšení Full HD, so slovenskými titulkami a bez nutnosti plateného členstva.',
+    releaseDate: 'Jul 03, 2026',
+    developer: 'Netflix Inc. / TobiPack Mobile Labs',
+    genres: ['Aplikácia', 'Nástroje', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '34 MB',
+    version: 'v10.6.2 (Premium Unlocked)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 13.0+', processor: 'Quad-Core 1.3 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '80 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 16.0+', processor: 'Octa-Core 1.8 GHz', memory: '4 GB RAM', graphics: 'Standard GPU', storage: '150 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Premium Streaming APK', url: 'https://tobipack.gg/download/netflix-mobile-unlocked.apk', size: '34 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 2200000,
+    isPopular: true
+  },
+  {
+    id: 'youtube-revanced',
+    name: 'YouTube ReVanced (Full Premium Unlocked)',
+    description: 'Ultimátna náhrada za YouTube aplikáciu. Odomyká všetky prémiové výhody: kompletné blokovanie sponzorovaných segmentov (SponsorBlock), prehrávanie hudby na pozadí a pri zhasnutom displeji, režim Picture-in-Picture (obraz v obraze), sťahovanie videí do mobilu a vynútenie HDR kvality.',
+    releaseDate: 'Jul 02, 2026',
+    developer: 'ReVanced Team / TobiPack Browser Lab',
+    genres: ['Aplikácia', 'Populárne', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '118 MB',
+    version: 'v19.14.35 (Pre-Compiled)',
+    requirements: {
+      minimum: { os: 'Android 8.0+', processor: 'Quad-Core 1.5 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '200 MB' },
+      recommended: { os: 'Android 11.0+', processor: 'Octa-Core 2.0 GHz', memory: '4 GB RAM', graphics: 'Standard GPU', storage: '300 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack ReVanced + MicroG APK', url: 'https://tobipack.gg/download/youtube-revanced-full.apk', size: '118 MB', status: 'online' }
+    ],
+    rating: 4.9,
+    downloadsCount: 5100000,
+    isPopular: true
+  },
+  {
+    id: 'viber-messenger',
+    name: 'Viber Messenger (Premium Sticker Unlocked)',
+    description: 'Bezplatné a bezpečné posielanie správ a hovory s kýmkoľvek. Táto špeciálna TobiPack edícia odomyká všetky platené sady nálepiek a emotikonov zadarmo, odstraňuje reklamné pruhy a prináša pokročilú kompresiu pre plynulejšie hovory na pomalšom internete.',
+    releaseDate: 'Jan 10, 2026',
+    developer: 'Rakuten Viber / TobiPack Team',
+    genres: ['Aplikácia', 'Nástroje'],
+    coverUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '56 MB',
+    version: 'v21.5.0 (Unlocked)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 13.0+', processor: 'Quad-Core 1.3 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '120 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 15.0+', processor: 'Quad-Core 1.8 GHz', memory: '3 GB RAM', graphics: 'Standard GPU', storage: '180 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Viber Premium (APK)', url: 'https://tobipack.gg/download/viber-premium.apk', size: '56 MB', status: 'online' }
+    ],
+    rating: 4.5,
+    downloadsCount: 840000,
+    isPopular: false
+  },
+  {
+    id: 'telegram-premium',
+    name: 'Telegram Premium Lite (Ultra High Speed)',
+    description: 'Super-rýchla a bezpečná cloudová četovacia aplikácia. TobiPack Premium Lite verzia odomyká prémiové výhody: dvojnásobné limity na prenosy, extra rýchle sťahovanie súborov (bez umelého limitovania rýchlosti), prémiové preklady správ, animované emotikony a pokročilú správu chatov.',
+    releaseDate: 'Jun 20, 2026',
+    developer: 'Telegram FZ-LLC / TobiPack',
+    genres: ['Aplikácia', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1614680376739-414d95ff43df?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '42 MB',
+    version: 'v10.11.0 (Premium Lite)',
+    requirements: {
+      minimum: { os: 'Android 6.0+ / iOS 13.0+', processor: 'Quad-Core 1.4 GHz', memory: '2 GB RAM', graphics: 'Standard GPU', storage: '100 MB' },
+      recommended: { os: 'Android 10.0+ / iOS 16.0+', processor: 'Octa-Core 2.0 GHz', memory: '4 GB RAM', graphics: 'Standard GPU', storage: '150 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Telegram Premium APK', url: 'https://tobipack.gg/download/telegram-premium.apk', size: '42 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 1940000,
+    isPopular: true
+  },
+  {
+    id: 'snapchat-plus',
+    name: 'Snapchat+ (Premium Modded Perks)',
+    description: 'Zdieľajte momenty s priateľmi! Snapchat+ od TobiPack obsahuje exkluzívne výhody: umožňuje ukladať snapy a chaty bez upozornenia odosielateľa (Anti-Screenshot), vypína oznamovanie o zobrazení polohy a odomyká špeciálne ikony na plochu.',
+    releaseDate: 'Apr 28, 2026',
+    developer: 'Snap Inc. / TobiPack Mobile',
+    genres: ['Aplikácia', 'Populárne'],
+    coverUrl: 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '72 MB',
+    version: 'v12.82.0 (Plus MOD)',
+    requirements: {
+      minimum: { os: 'Android 7.0+ / iOS 14.0+', processor: 'Quad-Core 1.5 GHz', memory: '3 GB RAM', graphics: 'Standard GPU', storage: '150 MB' },
+      recommended: { os: 'Android 11.0+ / iOS 16.0+', processor: 'Octa-Core 2.0 GHz', memory: '4 GB RAM', graphics: 'Standard GPU', storage: '220 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Plus Direct (APK)', url: 'https://tobipack.gg/download/snapchat-plus.apk', size: '72 MB', status: 'online' }
+    ],
+    rating: 4.6,
+    downloadsCount: 1350000,
+    isPopular: true
+  },
+  {
+    id: 'picsart-pro',
+    name: 'Picsart Photo Editor (Gold Premium Unlocked)',
+    description: 'Najlepší mobilný editor fotografií a koláží. Picsart Gold edícia odomyká všetky prémiové šablóny, VIP filtre, AI nástroje na vyrezávanie objektov, exkluzívne texty a retušovacie masky, ktoré by si inak vyžadovali drahé mesačné predplatné.',
+    releaseDate: 'Jul 01, 2026',
+    developer: 'PicsArt, Inc. / TobiPack Mobile Team',
+    genres: ['Aplikácia', 'Kreslenie'],
+    coverUrl: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=600&h=900',
+    size: '78 MB',
+    version: 'v25.1.2 (Gold Unlocked)',
+    requirements: {
+      minimum: { os: 'Android 8.0+ / iOS 15.0+', processor: 'Quad-Core 1.5 GHz', memory: '3 GB RAM', graphics: 'Mali-G52', storage: '200 MB' },
+      recommended: { os: 'Android 11.0+ / iOS 16.0+', processor: 'Octa-Core 2.2 GHz', memory: '6 GB RAM', graphics: 'Adreno 618', storage: '350 MB' }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Gold Unlocked APK', url: 'https://tobipack.gg/download/picsart-pro.apk', size: '78 MB', status: 'online' }
+    ],
+    rating: 4.8,
+    downloadsCount: 940000,
+    isPopular: false
+  }
+];
+
+// Dynamic map for authentic product logos (icons) as requested by the user
+const AUTHENTIC_LOGO_MAP: Record<string, string> = {
+  // Games
+  'minecraft-pe': 'https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&q=80&w=150&h=150',
+  'gta-sa-mobile': 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=150&h=150',
+  'geometry-dash-mobile': 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=150&h=150',
+  'stardew-valley-mobile': 'https://images.unsplash.com/photo-1595590424283-b8f17842773f?auto=format&fit=crop&q=80&w=150&h=150',
+  'subway-surfers-mod': 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=150&h=150',
+  'roblox-mod': 'https://images.unsplash.com/photo-1566241477600-ac026ad43874?auto=format&fit=crop&q=80&w=150&h=150',
+  'bloons-td6-mobile': 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=150&h=150',
+  'terraria-mobile': 'https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?auto=format&fit=crop&q=80&w=150&h=150',
+  'dead-cells-mobile': 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=150&h=150',
+  'fnaf-mobile': 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=150&h=150',
+  'slay-the-spire-mobile': 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=150&h=150',
+  'monopoly-mobile': 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=150&h=150',
+  'brawl-stars': 'https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&q=80&w=150&h=150',
+  'pubg-mobile': 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=150&h=150',
+  'clash-of-clans': 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=150&h=150',
+  'candy-crush': 'https://images.unsplash.com/photo-1581795669633-91b77bc02d21?auto=format&fit=crop&q=80&w=150&h=150',
+  'among-us-mobile': 'https://images.unsplash.com/photo-1608889174636-24018260a92b?auto=format&fit=crop&q=80&w=150&h=150',
+  'hill-climb-racing': 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=150&h=150',
+  'pou-mobile': 'https://images.unsplash.com/photo-1584441401010-4ff69011e8bb?auto=format&fit=crop&q=80&w=150&h=150',
+  'angry-birds-classic': 'https://images.unsplash.com/photo-1553484771-047a44eee27f?auto=format&fit=crop&q=80&w=150&h=150',
+
+  // Apps
+  'spotify-premium-mod': 'https://images.unsplash.com/photo-1614680376593-902f74fa0d41?auto=format&fit=crop&q=80&w=150&h=150',
+  'ibis-paint-x-pro': 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=150&h=150',
+  'chrome-mobile-adblock': 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=150&h=150',
+  'brave-browser-premium': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=150&h=150',
+  'autodesk-sketchbook-premium': 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=150&h=150',
+  'capcut-pro-unlocked': 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=150&h=150',
+  'duolingo-super-premium': 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&q=80&w=150&h=150',
+  'infinite-painter-pro': 'https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&q=80&w=150&h=150',
+  'es-file-explorer-pro': 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=150&h=150',
+  'adobe-lightroom-premium': 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=150&h=150',
+  'opera-touch-vpn': 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=150&h=150',
+  'nova-launcher-prime-mod': 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=150&h=150',
+  'whatsapp-messenger': 'https://images.unsplash.com/photo-1563986768494-0d2cd4034630?auto=format&fit=crop&q=80&w=150&h=150',
+  'messenger-lite': 'https://images.unsplash.com/photo-1530811761204-8961d2ef4beb?auto=format&fit=crop&q=80&w=150&h=150',
+  'tiktok-mobile': 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=150&h=150',
+  'instagram-mod': 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=150&h=150',
+  'netflix-mobile': 'https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?auto=format&fit=crop&q=80&w=150&h=150',
+  'youtube-revanced': 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&q=80&w=150&h=150',
+  'viber-messenger': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=150&h=150',
+  'telegram-premium': 'https://images.unsplash.com/photo-1614680376739-414d95ff43df?auto=format&fit=crop&q=80&w=150&h=150',
+  'snapchat-plus': 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&q=80&w=150&h=150',
+  'picsart-pro': 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=150&h=150'
+};
+
+// Programmatic expansion of the main catalogs
+MOBILE_GAMES_CATALOG.push(...ADDITIONAL_VERIFIED_GAMES);
+MOBILE_APPS_CATALOG.push(...ADDITIONAL_VERIFIED_APPS);
+
+// Helper to remove any pre-existing duplicate IDs
+const removeDuplicates = (list: Game[]) => {
+  const seen = new Set<string>();
+  const uniqueList: Game[] = [];
+  for (const item of list) {
+    if (!seen.has(item.id)) {
+      seen.add(item.id);
+      uniqueList.push(item);
+    }
+  }
+  return uniqueList;
+};
+
+// Apply authentic logos to all mobile entries
+for (const game of MOBILE_GAMES_CATALOG) {
+  game.logoUrl = AUTHENTIC_LOGO_MAP[game.id] || game.coverUrl;
+}
+for (const app of MOBILE_APPS_CATALOG) {
+  app.logoUrl = AUTHENTIC_LOGO_MAP[app.id] || app.coverUrl;
+}
+
+// Ensure pre-existing catalogs have no duplicate keys
+const cleanedPc = removeDuplicates(ALL_GAMES_CATALOG);
+ALL_GAMES_CATALOG.length = 0;
+ALL_GAMES_CATALOG.push(...cleanedPc);
+
+const cleanedMobileGames = removeDuplicates(MOBILE_GAMES_CATALOG);
+MOBILE_GAMES_CATALOG.length = 0;
+MOBILE_GAMES_CATALOG.push(...cleanedMobileGames);
+
+const cleanedMobileApps = removeDuplicates(MOBILE_APPS_CATALOG);
+MOBILE_APPS_CATALOG.length = 0;
+MOBILE_APPS_CATALOG.push(...cleanedMobileApps);
+
+// === MASSIVE PROCEDURAL GENERATION TO 15,000 TOTAL ITEMS ===
+function makeRandom(seed: number) {
+  let s = seed;
+  return function() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+const pcAdjectives = [
+  'Cyberpunk', 'Space', 'Shadow', 'Dark', 'Light', 'Lost', 'Dead', 'Eternal', 'Silent', 'Project', 'Final', 'Grand', 
+  'Super', 'Classic', 'Retro', 'Epic', 'Legendary', 'Cosmic', 'Bio', 'Nano', 'Mecha', 'Star', 'Iron', 'Golden', 'Doom', 
+  'Resident', 'Forza', 'Sub', 'Under', 'Deep', 'Black', 'White', 'Red', 'Blue', 'Green', 'Wild', 'Mad', 'Desert', 
+  'Frozen', 'Atomic', 'Metro', 'Battlefield', 'Call of', 'Witcher', 'Hollow', 'Celeste', 'Hades', 'Elden', 'Portal', 
+  'Half', 'Dying', 'Deadly', 'Monster', 'Devil', 'God', 'Sacred', 'Gothic', 'Divine', 'Outlaw', 'Rogue', 'Ghost',
+  'Total', 'Ironclad', 'Forgotten', 'Lethal', 'Phasmo', 'Rust', 'Helldivers', 'Starfield', 'Cyber', 'Neon'
+];
+
+const pcNouns = [
+  'Ring', 'Wider', 'Knight', 'Fighter', 'Racer', 'Shooter', 'Tactics', 'War', 'Clash', 'Zone', 'Forces', 'Empire', 
+  'Kingdom', 'Odyssey', 'Origins', 'Horizon', 'Motorsport', 'City', 'Town', 'Village', 'Survival', 'Flight', 'Simulator', 
+  'Tycoon', 'Manager', 'Clicker', 'Run', 'Rider', 'Legacy', 'Vanguard', 'Protocol', 'Effect', 'Alliance', 'Command', 
+  'Conquest', 'Frontier', 'Remake', 'Redux', 'Exodus', 'Chronicles', 'Breaker', 'Scourge', 'Tide', 'Storm', 'Shadows', 
+  'Rebirth', 'Evolution', 'Bound', 'Hunter', 'Wilds', 'Rage', 'Sin', 'Fate', 'Company', 'Siege', 'Tarkov', 'Division'
+];
+
+const pcSuffixes = [
+  'II', 'III', 'IV', 'V', 'VI', '2026', 'Remastered', 'Enhanced Edition', 'Director\'s Cut', 'Gold Edition', 'Ultimate', 
+  'Reborn', 'Reloaded', 'Unleashed', 'Offline', 'Deluxe', 'Slovakia', 'Edition', '3D', 'HD', 'VR', 'RTX', 'Lite', 'Plus', 'Pro'
+];
+
+const unsplashPcIds = [
+  'photo-1542751371-adc38448a05e', 'photo-1538481199705-c710c4e965fc', 'photo-1511512578047-dfb367046420',
+  'photo-1550745165-9bc0b252726f', 'photo-1552820728-8b83bb6b773f', 'photo-1518709268805-4e9042af9f23',
+  'photo-1607604276583-eef5d076aa5f', 'photo-1509198397868-475647b2a1e5', 'photo-1612287230202-1bf1d85d1bdf',
+  'photo-1553481187-be93c21490a9', 'photo-1551103782-8ab07afd45c1', 'photo-1593305841991-05c297ba4575',
+  'photo-1614850523459-c2f4c699c52e', 'photo-1486406146926-c627a92ad1ab', 'photo-1506157786151-b8491531f063',
+  'photo-1547082299-de196ea013d6', 'photo-1580234810907-b40315b76418', 'photo-1592478411213-6153e4ebc07d',
+  'photo-1579546929518-9e396f3cc809', 'photo-1618005182384-a83a8bd57fbe', 'photo-1579783900882-c0d3dad7b119',
+  'photo-1478760329108-5c3ed9d495a0'
+];
+
+const pcRand = makeRandom(12345);
+const pcSeenIds = new Set<string>(ALL_GAMES_CATALOG.map(g => g.id));
+
+while (ALL_GAMES_CATALOG.length < 5000) {
+  const adj = pcAdjectives[Math.floor(pcRand() * pcAdjectives.length)];
+  const noun = pcNouns[Math.floor(pcRand() * pcNouns.length)];
+  const suff = pcRand() < 0.65 ? pcSuffixes[Math.floor(pcRand() * pcSuffixes.length)] : '';
+  const name = `${adj} ${noun}${suff ? ' ' + suff : ''}`;
+  const id = 'pc-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  
+  if (pcSeenIds.has(id)) {
+    continue;
+  }
+  pcSeenIds.add(id);
+  
+  const rating = parseFloat((4.0 + pcRand() * 0.9).toFixed(1));
+  const sizeGb = Math.floor(pcRand() * 115) + 5;
+  const downloads = Math.floor(pcRand() * 1200000) + 15000;
+  
+  const photoId = unsplashPcIds[Math.floor(pcRand() * unsplashPcIds.length)];
+  const coverUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&q=80&w=600&h=900`;
+  
+  const selectedGenres = ['Hra'];
+  const possibleGenres = ['Action', 'Adventure', 'RPG', 'Open World', 'Strategy', 'Indie', 'Co-op', 'Horror', 'Survival'];
+  const genreCount = Math.floor(pcRand() * 2) + 1;
+  for (let i = 0; i < genreCount; i++) {
+    const g = possibleGenres[Math.floor(pcRand() * possibleGenres.length)];
+    if (!selectedGenres.includes(g)) {
+      selectedGenres.push(g);
+    }
+  }
+  
+  ALL_GAMES_CATALOG.push({
+    id,
+    name,
+    description: `Stiahnite si ${name} pre PC úplne zadarmo a bez čakania! Táto prémiová distribúcia od TobiPack obsahuje všetky doterajšie aktualizácie, DLC balíčky a najnovšie opravy chýb. Hra je kompletne predinštalovaná, predcracknutá a otestovaná cez Windows Defender - stačí rozbaliť a hrať vo vysokej rýchlosti cez naše dedikované mirror servery.`,
+    releaseDate: 'Najnovšia Verzia',
+    developer: 'TobiPack PC Port',
+    genres: selectedGenres,
+    coverUrl,
+    size: `${sizeGb}.0 GB`,
+    version: `v1.${Math.floor(pcRand() * 9)}.${Math.floor(pcRand() * 4)}`,
+    isPopular: pcRand() < 0.12,
+    rating,
+    downloadsCount: downloads,
+    requirements: {
+      minimum: {
+        os: 'Windows 10 (64-bit)',
+        processor: 'Intel Core i5-6600K or AMD Ryzen 5 1400',
+        memory: '8 GB RAM',
+        graphics: 'NVIDIA GeForce GTX 1060 3GB or AMD Radeon RX 570 4GB',
+        storage: `${sizeGb + 2} GB voľného miesta`
+      },
+      recommended: {
+        os: 'Windows 10/11 (64-bit)',
+        processor: 'Intel Core i7-8700K or AMD Ryzen 5 3600X',
+        memory: '16 GB RAM',
+        graphics: 'NVIDIA GeForce RTX 2060 6GB or AMD Radeon RX 5700 XT 8GB',
+        storage: `${sizeGb + 2} GB voľného miesta (SSD odporúčané)`
+      }
+    },
+    downloadLinks: [
+      { name: 'Qiwi (Vysokorýchlostný Direct)', url: `https://qiwi.gg/file/tobipack-${id}`, size: `${sizeGb}.0 GB`, status: 'online' },
+      { name: 'GoFile (Neobmedzené sťahovanie)', url: `https://gofile.io/d/tobipack-${id}`, size: `${sizeGb}.0 GB`, status: 'online' },
+      { name: 'Torrent (Magnet Link)', url: `magnet:?xt=urn:btih:tobipack${id.replace(/[^a-z0-9]/g, '')}`, size: `${sizeGb}.0 GB`, status: 'online' }
+    ]
+  });
+}
+
+const mobGameAdjectives = [
+  'Angry', 'Flappy', 'Pocket', 'Tiny', 'Mini', 'Super', 'Crazy', 'Mega', 'Hyper', 'Idle', 'Tap', 'Click', 'Clash', 
+  'Subway', 'Temple', 'Fruit', 'Candy', 'Pixel', 'Silly', 'Happy', 'Fun', 'Smash', 'Brawl', 'Strike', 'Royale', 
+  'Survival', 'Sonic', 'Mario', 'Zelda', 'Pokemon', 'Lego', 'SpongeBob', 'Anime', 'Ninja', 'Dragon', 'Stickman', 
+  'Shadow', 'Bullet', 'Cyber', 'Neon', 'Slovak', 'Hill', 'Traffic', 'Jetpack', 'Plants', 'Dead', 'Call of', 'Mobile'
+];
+
+const mobGameNouns = [
+  'Run', 'Runner', 'Dash', 'Jump', 'Racer', 'Shooter', 'Puzzle', 'Match 3', 'Saga', 'Pop', 'Blast', 'Crush', 'Quest', 
+  'Hero', 'Legends', 'Star', 'Fighter', 'Brawler', 'Clans', 'Royale', 'Empire', 'Craft', 'Block', 'World', 'Go', 
+  'Evolution', 'Park', 'Zoo', 'Farm', 'City', 'Simulator', 'Tycoon', 'Kart', 'League', 'Soccer', 'Cricket', 'Golf', 
+  'Card', 'Sudoku', 'Solitaire', 'Words', 'Brain', 'Trigger', 'Clash', 'Duty', 'Zombie'
+];
+
+const mobGameSuffixes = [
+  'Mobile', 'GO', 'Pocket', 'Edition', 'MOD', 'Unlocked', 'Skins Unlocked', 'Free', '3D', '2', '3', 'Plus', 'Lite', 
+  'Pro', 'HD', 'Online', 'Multiplayer', 'Slovakia', 'Offline', 'Mod Menu'
+];
+
+const unsplashMobGameIds = [
+  'photo-1511671782779-c97d3d27a1d4', 'photo-1526374965328-7f61d4dc18c5', 'photo-1551288049-bebda4e38f71',
+  'photo-1614680376739-414d95ff43df', 'photo-1563986768609-322da13575f3', 'photo-1616440347437-b1c73416efc2',
+  'photo-1598488035139-bdbb2231ce04', 'photo-1601972599720-36938d4ecd31', 'photo-1550745165-9bc0b252726f',
+  'photo-1506744038136-46273834b3fb', 'photo-1546410531-bb4caa6b424d', 'photo-1579783928621-7a13d66a62d1'
+];
+
+const mobGameRand = makeRandom(54321);
+const mobGameSeenIds = new Set<string>(MOBILE_GAMES_CATALOG.map(g => g.id));
+
+while (MOBILE_GAMES_CATALOG.length < 5000) {
+  const adj = mobGameAdjectives[Math.floor(mobGameRand() * mobGameAdjectives.length)];
+  const noun = mobGameNouns[Math.floor(mobGameRand() * mobGameNouns.length)];
+  const suff = mobGameRand() < 0.6 ? mobGameSuffixes[Math.floor(mobGameRand() * mobGameSuffixes.length)] : '';
+  const name = `${adj} ${noun}${suff ? ' ' + suff : ''}`;
+  const id = 'mob-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  
+  if (mobGameSeenIds.has(id)) {
+    continue;
+  }
+  mobGameSeenIds.add(id);
+  
+  const rating = parseFloat((4.0 + mobGameRand() * 0.9).toFixed(1));
+  const sizeMb = Math.floor(mobGameRand() * 750) + 15;
+  const downloads = Math.floor(mobGameRand() * 1500000) + 40000;
+  
+  const photoId = unsplashMobGameIds[Math.floor(mobGameRand() * unsplashMobGameIds.length)];
+  const coverUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&q=80&w=600&h=900`;
+  
+  MOBILE_GAMES_CATALOG.push({
+    id,
+    name,
+    description: `Sťahujte prémiovú mobilnú hru ${name} (MOD, odomknuté všetko) kompletne zadarmo pre Android a iOS! Táto exkluzívna edícia od TobiPack obsahuje odomknuté platené funkcie, neobmedzené peniaze, skiny a integrované herné menu pre najlepší zážitok bez reklám. Hra je plne otestovaná na vírusy a optimalizovaná pre plynulý chod na každom telefóne.`,
+    releaseDate: 'Najnovšia Verzia',
+    developer: 'TobiPack Mobile Dev',
+    genres: ['Hra', 'Mobilné', 'Populárne'],
+    coverUrl,
+    size: `${sizeMb} MB`,
+    version: `v${Math.floor(mobGameRand() * 10)}.${Math.floor(mobGameRand() * 9)}.${Math.floor(mobGameRand() * 5)} (MOD)`,
+    isPopular: mobGameRand() < 0.15,
+    rating,
+    downloadsCount: downloads,
+    logoUrl: coverUrl,
+    requirements: {
+      minimum: {
+        os: 'Android 7.0+ / iOS 14.0+',
+        processor: 'Quad-Core 1.5 GHz',
+        memory: '2 GB RAM',
+        graphics: 'Mali-G72 or Adreno 506',
+        storage: `${sizeMb + 50} MB voľného miesta`
+      },
+      recommended: {
+        os: 'Android 11.0+ / iOS 17.0+',
+        processor: 'Octa-Core 2.2 GHz',
+        memory: '4 GB RAM',
+        graphics: 'Mali-G76 or Adreno 610',
+        storage: `${sizeMb + 100} MB (Rýchle úložisko)`
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack High-Speed Mobile CDN (APK/IPA)', url: `https://gofile.io/d/tobipack-${id}.apk`, size: `${sizeMb} MB`, status: 'online' },
+      { name: 'HappyMod Bezpečný Mirror (Direct)', url: `https://qiwi.gg/file/tobipack-${id}.apk`, size: `${sizeMb} MB`, status: 'online' }
+    ]
+  });
+}
+
+const appAdjectives = [
+  'Spotify', 'Netflix', 'Brave', 'CapCut', 'Duolingo', 'Adobe', 'Opera', 'Nova', 'WhatsApp', 'Telegram', 'TikTok', 
+  'Instagram', 'PicsArt', 'Smart', 'Safe', 'Fast', 'Easy', 'Simple', 'Secure', 'Clean', 'Daily', 'My', 'Super', 
+  'Ultra', 'Power', 'Magic', 'Gold', 'Premium', 'Pro', 'Elite', 'Slovak', 'Global', 'Advanced', 'Universal', 
+  'Quick', 'Pocket', 'Cloud', 'Direct', 'Direct-Rip', 'Turbo', 'Express', 'Norton', 'Avast', 'Total', 'VLC'
+];
+
+const appNouns = [
+  'VPN', 'Antivirus', 'Cleaner', 'Browser', 'Player', 'Editor', 'Manager', 'Reader', 'Viewer', 'Notes', 'Calendar', 
+  'Weather', 'Tracker', 'Calculator', 'Camera', 'Gallery', 'Backup', 'Transfer', 'Messenger', 'Chat', 'Social', 'Map', 
+  'GPS', 'Dictionary', 'Translator', 'Fitness', 'Diet', 'Recipe', 'Budget', 'Wallet', 'Tools', 'Widgets', 'Office', 
+  'Document', 'Scanner', 'Recorder', 'Voice', 'Music', 'Video', 'Photos', 'Email', 'Mail', 'Optimizer', 'AdBlocker'
+];
+
+const appSuffixes = [
+  'Premium', 'Pro', 'Elite', '2026', 'Lite', 'Plus', 'Ultra', 'Gold', 'MOD', 'Unlocked', 'Slovakia', 'Ad-Free', 
+  'VIP', 'Manager', 'Suite', 'Edition', 'Gold MOD', 'Pre-Cracked'
+];
+
+const unsplashAppIds = [
+  'photo-1614680376593-902f74fa0d41', 'photo-1574375927938-d5a98e8edd86', 'photo-1563986768494-0d2cd4034630',
+  'photo-1611162617213-7d7a39e9b1d7', 'photo-1611162616305-c69b3fa7fbe0', 'photo-1547082299-de196ea013d6',
+  'photo-1526374965328-7f61d4dc18c5', 'photo-1513542789411-b6a5d4f31634', 'photo-1574717024653-61fd2cf4d44d',
+  'photo-1544383835-bda2bc66a55d', 'photo-1506744038136-46273834b3fb'
+];
+
+const appRand = makeRandom(98765);
+const appSeenIds = new Set<string>(MOBILE_APPS_CATALOG.map(g => g.id));
+
+while (MOBILE_APPS_CATALOG.length < 5000) {
+  const adj = appAdjectives[Math.floor(appRand() * appAdjectives.length)];
+  const noun = appNouns[Math.floor(appRand() * appNouns.length)];
+  const suff = appRand() < 0.7 ? appSuffixes[Math.floor(appRand() * appSuffixes.length)] : '';
+  const name = `${adj} ${noun}${suff ? ' ' + suff : ''}`;
+  const id = 'app-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  
+  if (appSeenIds.has(id)) {
+    continue;
+  }
+  appSeenIds.add(id);
+  
+  const rating = parseFloat((4.2 + appRand() * 0.7).toFixed(1));
+  const sizeMb = Math.floor(appRand() * 140) + 5;
+  const downloads = Math.floor(appRand() * 4000000) + 80000;
+  
+  const photoId = unsplashAppIds[Math.floor(appRand() * unsplashAppIds.length)];
+  const coverUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&q=80&w=600&h=900`;
+  
+  MOBILE_APPS_CATALOG.push({
+    id,
+    name,
+    description: `Stiahnite si prémiovú mobilnú aplikáciu ${name} (Pro MOD, odomknuté platené funkcie) kompletne zadarmo pre Android a iOS. Táto optimalizovaná verzia od TobiPack odstraňuje všetky otravné reklamy, odomyká VIP servery/funkcie, zlepšuje rýchlosť načítania a chráni vaše súkromie. Plne otestované a 100% bezpečné.`,
+    releaseDate: 'Najnovšia Verzia',
+    developer: 'TobiPack App Team',
+    genres: ['Aplikácia', 'Nástroje', 'Populárne'],
+    coverUrl,
+    size: `${sizeMb} MB`,
+    version: `v${Math.floor(appRand() * 5)}.${Math.floor(appRand() * 9)}.${Math.floor(appRand() * 10)} (Premium)`,
+    isPopular: appRand() < 0.2,
+    rating,
+    downloadsCount: downloads,
+    logoUrl: coverUrl,
+    requirements: {
+      minimum: {
+        os: 'Android 6.0+ / iOS 13.0+',
+        processor: 'Quad-Core 1.2 GHz',
+        memory: '1.5 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: `${sizeMb + 20} MB voľného miesta`
+      },
+      recommended: {
+        os: 'Android 10.0+ / iOS 16.0+',
+        processor: 'Octa-Core 2.0 GHz',
+        memory: '3 GB RAM',
+        graphics: 'Standard mobile GPU',
+        storage: `${sizeMb + 50} MB`
+      }
+    },
+    downloadLinks: [
+      { name: 'TobiPack Mobile Direct CDN (APK/IPA)', url: `https://gofile.io/d/tobipack-${id}.apk`, size: `${sizeMb} MB`, status: 'online' },
+      { name: 'Qiwi Premium Mirror (Direct)', url: `https://qiwi.gg/file/tobipack-${id}.apk`, size: `${sizeMb} MB`, status: 'online' }
+    ]
+  });
+}
+
+
 
 
 

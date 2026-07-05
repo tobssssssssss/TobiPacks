@@ -3,7 +3,7 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
-import { getRealisticSizeForGame } from './src/gamesData';
+import { getRealisticSizeForGame, MOBILE_GAMES_CATALOG, MOBILE_APPS_CATALOG, ALL_GAMES_CATALOG } from './src/gamesData';
 
 dotenv.config();
 
@@ -64,7 +64,7 @@ const COMMENTS: Comment[] = [
     id: 'c5',
     gameId: 'cyberpunk-2077',
     username: 'NightCitySamurai',
-    text: 'v2.12 H1 patch is super stable. Ray tracing overdrive is gorgeous on 4080. Thanks SteamRIP team, you are heroes!',
+    text: 'v2.12 H1 patch is super stable. Ray tracing overdrive is gorgeous on 4080. Thanks TobiPack team, you are heroes!',
     timestamp: '3 days ago',
     likes: 42
   }
@@ -279,11 +279,149 @@ async function startServer() {
     }
   });
 
-  // API Route: Search Steam and generate complete Game structures instantly for SteamRIP mirrors
+  // API Route: Search Steam and generate complete Game structures instantly for TobiPack mirrors
   app.get('/api/steam/search', async (req, res) => {
     const query = req.query.q as string;
+    const platform = req.query.platform as string;
     if (!query || query.trim().length < 2) {
       return res.json([]);
+    }
+
+    if (platform === 'mobile') {
+      const queryLower = query.toLowerCase().trim();
+      
+      // 1. First look for matching items in our local 10,000-item mobile databases!
+      const localMatches = [
+        ...MOBILE_GAMES_CATALOG,
+        ...MOBILE_APPS_CATALOG
+      ].filter(item => 
+        item.name.toLowerCase().includes(queryLower) || 
+        item.id.toLowerCase().includes(queryLower)
+      ).slice(0, 10);
+
+      // If we have robust local matches, return them instantly without calling Gemini!
+      if (localMatches.length >= 3) {
+        return res.json(localMatches);
+      }
+
+      // 2. Fallback to Gemini with local procedural generation fallback in case of rate limits
+      try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
+          throw new Error('GEMINI_API_KEY not configured');
+        }
+        const ai = new GoogleGenAI({ apiKey });
+        const prompt = `You are a professional mobile app store crawler for Softonic. Your job is to return a list of 4-6 mobile games or apps that match the search query "${query}".
+Generate highly accurate and realistic technical metadata, descriptions in Slovak, size, and version for these apps.
+For genres, make sure they contain either "Hra" or "Aplikácia" (very important to categorize correctly!), as well as other genres (e.g. "Popular", "Akčné", "Nástroje", "Social").
+Provide the response as a single valid JSON array of objects following this structure:
+[
+  {
+    "id": "unique-kebab-case-id",
+    "name": "Full App Name",
+    "description": "Engaging description in Slovak describing the app, features, and why it is great.",
+    "releaseDate": "Latest Version",
+    "developer": "Developer or Studio Name",
+    "genres": ["Genre1", "Genre2", ...],
+    "coverUrl": "https://images.unsplash.com/... (high quality visual related to the app from unsplash, size 600x900 or 400x600)",
+    "size": "App size (e.g. '120 MB', '45 MB')",
+    "version": "vX.Y.Z",
+    "rating": 4.5,
+    "downloadsCount": 150000,
+    "downloadLinks": [
+      { "name": "Direct APK Download (Vysoká rýchlosť)", "url": "https://gofile.io/d/tobipack-unique-id.apk", "size": "X MB", "status": "online" }
+    ]
+  }
+]
+Use only valid JSON and return nothing else.`;
+
+        const response = await ai.models.generateContent({
+          model: 'gemini-3.5-flash',
+          contents: prompt,
+          config: {
+            responseMimeType: 'application/json',
+            temperature: 0.3
+          }
+        });
+
+        const text = response.text;
+        if (text) {
+          const items = JSON.parse(text.trim());
+          return res.json(items);
+        }
+      } catch (geminiErr) {
+        console.error('Error generating mobile search results via Gemini, using procedural generator fallback:', geminiErr);
+        
+        // Procedurally generate realistic matching results on-the-fly!
+        const generatedMatches = [];
+        const queryClean = query.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+        const baseName = queryClean || 'Mobilná Aplikácia';
+        
+        const unsplashFallbackIds = [
+          'photo-1614680376593-902f74fa0d41', 'photo-1574375927938-d5a98e8edd86', 'photo-1563986768494-0d2cd4034630',
+          'photo-1611162617213-7d7a39e9b1d7', 'photo-1611162616305-c69b3fa7fbe0', 'photo-1547082299-de196ea013d6',
+          'photo-1526374965328-7f61d4dc18c5', 'photo-1513542789411-b6a5d4f31634', 'photo-1574717024653-61fd2cf4d44d',
+          'photo-1544383835-bda2bc66a55d', 'photo-1506744038136-46273834b3fb'
+        ];
+
+        for (let i = 0; i < 4; i++) {
+          const isGame = i % 2 === 0;
+          const name = i === 0 
+            ? `${baseName}` 
+            : i === 1 
+              ? `${baseName} Pro` 
+              : i === 2 
+                ? `Super ${baseName}` 
+                : `${baseName} Mobile`;
+          
+          const id = `proc-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+          
+          let hash = 0;
+          for (let c = 0; c < name.length; c++) {
+            hash += name.charCodeAt(c);
+          }
+          
+          const rating = parseFloat((4.2 + (hash % 8) / 10).toFixed(1));
+          const sizeMb = (hash % 160) + 15;
+          const downloads = (hash % 50) * 20000 + 45000;
+          const photoId = unsplashFallbackIds[hash % unsplashFallbackIds.length];
+          const coverUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&q=80&w=600&h=900`;
+
+          generatedMatches.push({
+            id,
+            name,
+            description: `Exkluzívne stiahnutie ${name} (Odomknuté premium funkcie) kompletne zadarmo pre váš mobilný telefón! Táto vyladená distribúcia od TobiPack neobsahuje žiadne reklamy, odomyká všetky prémiové a VIP možnosti a sťahuje sa maximálnou rýchlosťou cez naše CDN zrkadlá. Bezpečné a testované.`,
+            releaseDate: 'Najnovšia Verzia',
+            developer: `${baseName} Dev Studio`,
+            genres: isGame ? ['Hra', 'Mobilné', 'Populárne'] : ['Aplikácia', 'Nástroje', 'Populárne'],
+            coverUrl,
+            size: `${sizeMb} MB`,
+            version: `v1.${hash % 9}.${hash % 4}`,
+            rating,
+            downloadsCount: downloads,
+            requirements: {
+              minimum: {
+                os: 'Android 6.0+ / iOS 13.0+',
+                processor: 'Quad-Core 1.3 GHz',
+                memory: '1.5 GB RAM',
+                graphics: 'Standard mobile GPU',
+                storage: `${sizeMb + 20} MB voľného miesta`
+              },
+              recommended: {
+                os: 'Android 10.0+ / iOS 16.0+',
+                processor: 'Octa-Core 2.0 GHz',
+                memory: '3 GB RAM',
+                graphics: 'Standard mobile GPU',
+                storage: `${sizeMb + 50} MB`
+              }
+            },
+            downloadLinks: [
+              { name: 'TobiPack Mobile Direct CDN (APK/IPA)', url: `https://gofile.io/d/tobipack-${id}.apk`, size: `${sizeMb} MB`, status: 'online' }
+            ]
+          });
+        }
+        return res.json(generatedMatches);
+      }
     }
 
     try {
@@ -307,30 +445,30 @@ async function startServer() {
         const downloadLinks = [
           {
             name: 'Direct High-Speed Mirror (.ZIP)',
-            url: `https://gofile.io/d/steamrip-${id}-direct-download.zip`,
+            url: `https://gofile.io/d/tobipack-${id}-direct-download.zip`,
             size: sizeStr,
             status: 'online'
           },
           {
             name: 'Immediate Torrent Magnet (Instant Download)',
-            url: `magnet:?xt=urn:btih:${id}steamrip&dn=${encodeURIComponent(name)}`,
+            url: `magnet:?xt=urn:btih:${id}tobipack&dn=${encodeURIComponent(name)}`,
             size: sizeStr,
             status: 'online'
           },
           {
             name: 'Premium Direct Single File (.ZIP)',
-            url: `https://qiwi.gg/file/direct/steamrip-${id}.zip`,
+            url: `https://qiwi.gg/file/direct/tobipack-${id}.zip`,
             size: sizeStr,
             status: 'online'
           }
         ];
 
         return {
-          id: `steamrip-${id}`,
+          id: `tobipack-${id}`,
           name: name,
           description: `${name} is pre-installed, pre-cracked, and optimized for immediate high-speed download. This clean distribution contains all recent updates and original DLC contents. Windows Defender verified and fully tested.`,
           releaseDate: 'Latest Version',
-          developer: 'SteamRIP Mirror system',
+          developer: 'TobiPack Mirror system',
           genres: getGenresForGame(name),
           steamId: String(appId),
           coverUrl: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900.jpg`,
@@ -386,9 +524,9 @@ async function startServer() {
         }
       });
 
-      console.log(`Generating SteamRIP details for requested game: ${gameName}`);
+      console.log(`Generating TobiPack details for requested game: ${gameName}`);
 
-      const prompt = `You are the SteamRIP core game porter system. Your job is to extract and crack the requested PC game "${gameName}" and package it into a complete SteamRIP game structure JSON.
+      const prompt = `You are the TobiPack core game porter system. Your job is to extract and crack the requested PC game "${gameName}" and package it into a complete TobiPack game structure JSON.
 Generate real, highly accurate technical metadata, specifications, and layout values for this game.
 
 For system requirements, make them match the real-world demands of this game. 
@@ -457,7 +595,7 @@ Be thorough and highly realistic. Provide the response as a single valid JSON ob
         steamId: gameData.steamId || undefined,
         coverUrl: gameData.coverUrl || (gameData.steamId ? `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${gameData.steamId}/library_600x900.jpg` : 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600&h=900'),
         size: gameData.size || '35.0 GB',
-        version: gameData.version || 'v1.0 (SteamRIP Cracked)',
+        version: gameData.version || 'v1.0 (TobiPack Cracked)',
         requirements: gameData.requirements || {
           minimum: { os: 'Windows 10', processor: 'Intel i5', memory: '8 GB RAM', graphics: 'NVIDIA GTX 1060', storage: '40 GB available space' },
           recommended: { os: 'Windows 10/11', processor: 'Intel i7', memory: '16 GB RAM', graphics: 'NVIDIA RTX 2060', storage: '40 GB available space' }
@@ -499,7 +637,7 @@ Be thorough and highly realistic. Provide the response as a single valid JSON ob
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`SteamRIP Full-Stack server running on port ${PORT}`);
+    console.log(`TobiPack Full-Stack server running on port ${PORT}`);
   });
 }
 

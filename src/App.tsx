@@ -24,10 +24,11 @@ import {
   TrendingUp,
   Info,
   Clock,
-  ExternalLink
+  ExternalLink,
+  Smartphone
 } from 'lucide-react';
 import { Game, GameRequest, Comment, FAQItem } from './types';
-import { ALL_GAMES_CATALOG, MOBILE_GAMES_CATALOG, FAQ_ITEMS, GENRES_LIST, STEAMRIP_INDEX_PRESETS, getSteamCoverUrl, findSteamAppId, getGenresForGame, getRealisticSizeForGame } from './gamesData';
+import { ALL_GAMES_CATALOG, MOBILE_GAMES_CATALOG, MOBILE_APPS_CATALOG, FAQ_ITEMS, GENRES_LIST, TOBIPACK_INDEX_PRESETS, getSteamCoverUrl, findSteamAppId, getGenresForGame, getRealisticSizeForGame } from './gamesData';
 
 export default function App() {
   // Platform selection: 'none' (choice screen), 'pc', or 'mobile'
@@ -46,26 +47,43 @@ export default function App() {
   // Sorting & Pagination States
   const [sortBy, setSortBy] = useState<'rating' | 'size' | 'downloads' | 'name'>('rating');
   const [currentPage, setCurrentPage] = useState(1);
-  const gamesPerPage = 20; // 20 games per list/page
+  const [visibleCount, setVisibleCount] = useState(40);
+
+  const [mobileCategory, setMobileCategory] = useState<'all' | 'games' | 'apps'>('all');
 
   // Dynamic lists from Server / Session
   const [games, setGames] = useState<Game[]>(() => {
     const saved = localStorage.getItem('tobipack_platform');
-    return saved === 'mobile' ? MOBILE_GAMES_CATALOG : ALL_GAMES_CATALOG;
+    if (saved === 'mobile') {
+      return [...MOBILE_GAMES_CATALOG, ...MOBILE_APPS_CATALOG];
+    }
+    return ALL_GAMES_CATALOG;
   });
 
   // Sync platform changes to localStorage and set the active catalog list
   useEffect(() => {
     localStorage.setItem('tobipack_platform', platform);
     if (platform === 'mobile') {
-      setGames(MOBILE_GAMES_CATALOG);
+      if (mobileCategory === 'games') {
+        setGames(MOBILE_GAMES_CATALOG);
+      } else if (mobileCategory === 'apps') {
+        setGames(MOBILE_APPS_CATALOG);
+      } else {
+        setGames([...MOBILE_GAMES_CATALOG, ...MOBILE_APPS_CATALOG]);
+      }
     } else if (platform === 'pc') {
       setGames(ALL_GAMES_CATALOG);
     }
     setSelectedGame(null);
     setCurrentPage(1);
+    setVisibleCount(40);
     setSearchQuery('');
-  }, [platform]);
+  }, [platform, mobileCategory]);
+
+  useEffect(() => {
+    setVisibleCount(40);
+  }, [searchQuery]);
+
   const [requests, setRequests] = useState<GameRequest[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
 
@@ -88,7 +106,7 @@ export default function App() {
   const [downloadingGameId, setDownloadingGameId] = useState<string | null>(null);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
-  // Dynamic search fetcher from full Steam/SteamRIP directory
+  // Dynamic search fetcher from full Steam/TobiPack directory
   useEffect(() => {
     if (!searchQuery.trim() || searchQuery.length < 2) {
       setApiSuggestions([]);
@@ -98,7 +116,7 @@ export default function App() {
     const delayDebounce = setTimeout(async () => {
       setIsSearchingApi(true);
       try {
-        const res = await fetch(`/api/steam/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`/api/steam/search?q=${encodeURIComponent(searchQuery)}&platform=${platform}`);
         if (res.ok) {
           const data = await res.json();
           setApiSuggestions(data);
@@ -111,7 +129,7 @@ export default function App() {
     }, 300);
 
     return () => clearTimeout(delayDebounce);
-  }, [searchQuery]);
+  }, [searchQuery, platform]);
 
   // Setup initial requests from server
   useEffect(() => {
@@ -131,9 +149,24 @@ export default function App() {
       if (res.ok) {
         const data = await res.json();
         setRequests(data);
+        localStorage.setItem('tobipack_requests', JSON.stringify(data));
+      } else {
+        throw new Error('Server returned non-ok status');
       }
     } catch (err) {
-      console.error('Error fetching requests:', err);
+      console.warn('Error fetching requests from server, falling back to localStorage:', err);
+      const saved = localStorage.getItem('tobipack_requests');
+      if (saved) {
+        setRequests(JSON.parse(saved));
+      } else {
+        const initialRequests = [
+          { id: '1', gameName: 'Grand Theft Auto VI', requestedBy: 'Tobi', votes: 42, date: 'Dnes' },
+          { id: '2', gameName: 'FIFA 27', requestedBy: 'Maroš', votes: 19, date: 'Včera' },
+          { id: '3', gameName: 'Spider-Man 3', requestedBy: 'Jakub', votes: 12, date: 'Pred 3 dňami' }
+        ];
+        setRequests(initialRequests);
+        localStorage.setItem('tobipack_requests', JSON.stringify(initialRequests));
+      }
     }
   };
 
@@ -143,9 +176,23 @@ export default function App() {
       if (res.ok) {
         const data = await res.json();
         setComments(data);
+        localStorage.setItem(`tobipack_comments_${gameId}`, JSON.stringify(data));
+      } else {
+        throw new Error('Server returned non-ok status');
       }
     } catch (err) {
-      console.error('Error fetching comments:', err);
+      console.warn(`Error fetching comments for ${gameId} from server, falling back to localStorage:`, err);
+      const saved = localStorage.getItem(`tobipack_comments_${gameId}`);
+      if (saved) {
+        setComments(JSON.parse(saved));
+      } else {
+        const initialComments = [
+          { id: 'c1', gameId, username: 'TobiAdmin', text: 'Tento torrent aj priamy link bol otestovaný a je 100% funkčný. Nezabudnite spustiť "vipnut.bat"!', likes: 14, date: 'Pred 2 dňami' },
+          { id: 'c2', gameId, username: 'GamesLover', text: 'Perfektná rýchlosť sťahovania, stiahlo mi to za pár minút. Vďaka za hru!', likes: 5, date: 'Včera' }
+        ];
+        setComments(initialComments);
+        localStorage.setItem(`tobipack_comments_${gameId}`, JSON.stringify(initialComments));
+      }
     }
   };
 
@@ -155,6 +202,15 @@ export default function App() {
     if (!selectedGame || !commentUser.trim() || !commentText.trim()) return;
 
     setSubmittingComment(true);
+    const fallbackComment = {
+      id: 'local_' + Date.now(),
+      gameId: selectedGame.id,
+      username: commentUser,
+      text: commentText,
+      likes: 0,
+      date: 'Práve teraz'
+    };
+
     try {
       const res = await fetch('/api/comments', {
         method: 'POST',
@@ -169,9 +225,17 @@ export default function App() {
         const newComment = await res.json();
         setComments(prev => [newComment, ...prev]);
         setCommentText('');
+      } else {
+        throw new Error('Server non-ok');
       }
     } catch (err) {
-      console.error('Error posting comment:', err);
+      console.warn('Failed to post comment to server, saving locally:', err);
+      setComments(prev => {
+        const updated = [fallbackComment, ...prev];
+        localStorage.setItem(`tobipack_comments_${selectedGame.id}`, JSON.stringify(updated));
+        return updated;
+      });
+      setCommentText('');
     } finally {
       setSubmittingComment(false);
     }
@@ -179,14 +243,22 @@ export default function App() {
 
   // Like comment
   const handleLikeComment = async (commentId: string) => {
+    if (!selectedGame) return;
     try {
       const res = await fetch(`/api/comments/${commentId}/like`, { method: 'POST' });
       if (res.ok) {
         const updated = await res.json();
         setComments(prev => prev.map(c => c.id === commentId ? updated : c));
+      } else {
+        throw new Error('Server non-ok');
       }
     } catch (err) {
-      console.error('Error liking comment:', err);
+      console.warn('Failed to like comment on server, liking locally:', err);
+      setComments(prev => {
+        const updated = prev.map(c => c.id === commentId ? { ...c, likes: (c.likes || 0) + 1 } : c);
+        localStorage.setItem(`tobipack_comments_${selectedGame.id}`, JSON.stringify(updated));
+        return updated;
+      });
     }
   };
 
@@ -196,6 +268,14 @@ export default function App() {
     if (!newRequestName.trim() || !newRequestUser.trim()) return;
 
     setSubmittingRequest(true);
+    const fallbackRequest = {
+      id: 'local_' + Date.now(),
+      gameName: newRequestName,
+      requestedBy: newRequestUser,
+      votes: 1,
+      date: 'Práve teraz'
+    };
+
     try {
       const res = await fetch('/api/requests', {
         method: 'POST',
@@ -209,9 +289,18 @@ export default function App() {
         await fetchRequests();
         setNewRequestName('');
         setNewRequestUser('');
+      } else {
+        throw new Error('Server non-ok');
       }
     } catch (err) {
-      console.error('Error submitting request:', err);
+      console.warn('Failed to submit request to server, saving locally:', err);
+      setRequests(prev => {
+        const updated = [fallbackRequest, ...prev];
+        localStorage.setItem('tobipack_requests', JSON.stringify(updated));
+        return updated;
+      });
+      setNewRequestName('');
+      setNewRequestUser('');
     } finally {
       setSubmittingRequest(false);
     }
@@ -223,9 +312,16 @@ export default function App() {
       const res = await fetch(`/api/requests/${requestId}/vote`, { method: 'POST' });
       if (res.ok) {
         await fetchRequests();
+      } else {
+        throw new Error('Server non-ok');
       }
     } catch (err) {
-      console.error('Error voting:', err);
+      console.warn('Failed to vote on server, voting locally:', err);
+      setRequests(prev => {
+        const updated = prev.map(r => r.id === requestId ? { ...r, votes: (r.votes || 0) + 1 } : r);
+        localStorage.setItem('tobipack_requests', JSON.stringify(updated));
+        return updated;
+      });
     }
   };
 
@@ -237,12 +333,27 @@ export default function App() {
     try {
       setDownloadingGameId(game.id);
       setDownloadProgress(10);
-      
+
+      // Mobile APK Direct Download Logic
+      if (platform === 'mobile') {
+        const apkLink = game.downloadLinks?.find(link => link.url.includes('.apk') || link.name.includes('APK')) || game.downloadLinks?.[0];
+        if (apkLink) {
+          setDownloadProgress(50);
+          setTimeout(() => {
+            setDownloadProgress(100);
+            window.open(apkLink.url, '_blank');
+            setDownloadingGameId(null);
+            setDownloadProgress(0);
+          }, 300);
+          return;
+        }
+      }
+
       const zip = new JSZip();
       const folderName = `${game.name.replace(/[^a-zA-Z0-9]/g, '')}`;
       const folder = zip.folder(folderName) || zip;
 
-      // Automatically fetch and pack game logo/image from SteamRIP / Steam CDN via our server-side proxy
+      // Automatically fetch and pack game logo/image from TobiPack / Steam CDN via our server-side proxy
       let packedLogo = false;
       if (game.coverUrl) {
         try {
@@ -275,19 +386,19 @@ export default function App() {
             ctx.fillRect(0, 0, 600, 900);
 
             // Tech Border
-            ctx.strokeStyle = platform === 'mobile' ? '#06b6d4' : '#a4f21d';
+            ctx.strokeStyle = '#a4f21d';
             ctx.lineWidth = 6;
             ctx.strokeRect(30, 30, 540, 840);
 
             // Header text
-            ctx.fillStyle = platform === 'mobile' ? '#06b6d4' : '#a4f21d';
+            ctx.fillStyle = '#a4f21d';
             ctx.font = 'bold 24px monospace';
             ctx.textAlign = 'center';
             ctx.fillText('TOBIPACK OFFICIAL PORTAL', 300, 100);
 
             // Large Icon
             ctx.font = 'bold 120px Arial';
-            ctx.fillText(platform === 'mobile' ? '📱' : '🎮', 300, 320);
+            ctx.fillText('🎮', 300, 320);
 
             // Title line wrapping
             ctx.fillStyle = '#ffffff';
@@ -309,7 +420,7 @@ export default function App() {
             ctx.fillText(line.trim(), 300, textY);
 
             // Footer
-            ctx.fillStyle = platform === 'mobile' ? '#06b6d4' : '#a4f21d';
+            ctx.fillStyle = '#a4f21d';
             ctx.font = 'bold 20px monospace';
             ctx.fillText('✓ CERTIFIED SAFE MIRROR', 300, 760);
 
@@ -323,11 +434,11 @@ export default function App() {
           console.error("Failed to generate canvas logo fallback inside zip:", canvasErr);
         }
       }
-      
+
       // 1. [gameName].exe
       const exeContent = `TobiPack - ${game.name} pre-installed launcher.\n\nPre spustenie hry najskôr spustite súbor 'vipnut.bat' pre správne povolenie výnimiek v antivíruse!\nAntivírusové programy (vrátane Windows Defenderu) môžu inak omylom zmazať spúšťací cracknutý súbor hry (tzv. False Positive).\n\nPo pridaní výnimky môžete bez problémov spustiť hru.`;
       folder.file(`${game.name}.exe`, exeContent);
-      
+
       // 2. tobisnavod.txt
       const navodContent = `======================================================================
                NÁVOD NA SPUSTENIE HRY: ${game.name}
@@ -336,7 +447,7 @@ export default function App() {
 Ďakujeme za stiahnutie hry cez TobiPack!
 
 [!] SÚČASŤOU TOHTO ARCHÍVU JE AJ AUTOMATICKY STIAHNUTÝ OBRÁZOK/LOGO HRY:
-    -> "${game.name}_logo.jpg" (stiahnuté zo serverov SteamRIP/Steam CDN pre TobiPack)
+    -> "${game.name}_logo.jpg" (stiahnuté zo serverov TobiPack/Steam CDN pre TobiPack)
 
 Pre bezproblémové spustenie hry postupujte presne podľa týchto krokov:
 
@@ -358,13 +469,13 @@ KROK 3: SPUSTITE HRU
 TobiPack • Pre-installed & pre-cracked PC games
 ======================================================================`;
       folder.file('tobisnavod.txt', navodContent);
-      
+
       // 3. vipnut.bat
       const batContent = `@echo off
 :: Slovak language support
 chcp 65001 > nul
-title TobiPack - ${game.name} Aktivátor výnimiek
-color 0a
+title TobiPack - ${game.name} Aktivátor výnimiek a Kontrola Steamu
+color 0b
 cls
 echo ======================================================================
 echo                     TobiPack Bezpečnostný Asistent
@@ -402,13 +513,8 @@ powershell -Command "Start-Process 'ms-settings:windowsdefender'"
 echo.
 echo ======================================================================
 echo [HOTOVO] Priečinok bol pridaný do výnimiek (ak ste schválili UAC).
-echo Boli otvorené nastavenia Windows Security, kde môžete skontrolovať
-echo históriu hrozieb a povoliť prípadne zablokované súbory hry.
-echo.
-echo Teraz môžete bezpečne spustiť ${game.name}.exe!
 echo ======================================================================
-pause
-exit
+goto :check_steam
 
 :no
 cls
@@ -434,27 +540,133 @@ echo - Otvorte hlavný panel alebo nastavenia vášho antivírusu.
 echo - Nájdite sekciu 'Výnimky', 'Vylúčenia' alebo 'Dôveryhodná zóna' (Exceptions / Exclusions).
 echo - Pridajte celú túto zložku alebo priečinok do výnimiek, aby antivírus nekontroloval súbory hry.
 echo.
-echo Stlačte ľubovoľný kláves pre ukončenie a manuálne nastavenie...
+echo Stlačte ľubovoľný kláves pre pokračovanie na kontrolu Steamu...
 pause > nul
-exit
+goto :check_steam
 
 :cancel
 echo.
-echo Akcia bola prerušená používateľom.
+echo Akcia bola prerušená používateľom. Vykonáva sa kontrola Steamu...
+pause
+goto :check_steam
+
+:check_steam
+cls
+color 0a
+echo ======================================================================
+echo                      KONTROLA SLUŽBY STEAM
+echo ======================================================================
+echo.
+echo [i] Kontrolujem, či máte nainštalovanú aplikáciu Steam...
+echo.
+
+set "steam_installed=0"
+reg query "HKCU\Software\Valve\Steam" /v "SteamExe" >nul 2>&1
+if %errorlevel% equ 0 set "steam_installed=1"
+reg query "HKLM\Software\Wow6432Node\Valve\Steam" /v "InstallPath" >nul 2>&1
+if %errorlevel% equ 0 set "steam_installed=1"
+if exist "%ProgramFiles(x86)%\Steam\steam.exe" set "steam_installed=1"
+if exist "%ProgramFiles%\Steam\steam.exe" set "steam_installed=1"
+
+if "%steam_installed%"=="1" (
+    echo [✓] ÚSPECH: Steam bol nájdený nainštalovaný vo vašom systéme!
+    echo [!] UPOZORNENIE: Pred spustením hry MUSÍTE mať spustenú aplikáciu Steam!
+    echo     Bez spusteného Steamu sa hra nespustí správne.
+    echo.
+    echo Všetko je pripravené! Teraz môžete bezpečne spustiť ${game.name}.exe.
+    echo.
+    echo ======================================================================
+    echo HOTOVO / DONE!
+    echo ======================================================================
+    pause
+    exit
+) else (
+    color 0c
+    echo [X] CHYBA: Vo vašom počítači nebol nájdený nainštalovaný Steam!
+    echo.
+    echo Pre spustenie pre-cracknutých hier cez TobiPack MUSÍTE mať nainštalovaný
+    echo a spustený program Steam (aj keby ste hrali offline). Bez neho hra nepôjde!
+    echo.
+    echo Kde a ako si prajete stiahnuť Steam?
+    echo ----------------------------------------------------------------------
+    echo [T] - Stiahnuť PRIAMO sem do priečinka (Automatické stiahnutie SteamSetup.exe)
+    echo [I] - Otvoriť oficiálnu stránku Steamu v internetovom prehliadači
+    echo [B] - Preskočiť a dokončiť
+    echo ----------------------------------------------------------------------
+    echo.
+    set /p steam_choice="Zadajte vašu voľbu [T, I alebo B]: "
+    
+    if /i "%steam_choice%"=="T" goto :download_steam
+    if /i "%steam_choice%"=="I" goto :web_steam
+    goto :continue_setup
+)
+
+:download_steam
+cls
+color 0b
+echo ======================================================================
+echo                     SŤAHOVANIE SLUŽBY STEAM (TobiPack)
+echo ======================================================================
+echo.
+echo [i] Sťahujem oficiálny inštalátor služby Steam...
+echo     Súbor bude uložený ako SteamSetup.exe do tohto priečinka.
+echo.
+curl -L -o SteamSetup.exe https://repo.steampowered.com/steam/archive/stable/SteamSetup.exe
+if %errorlevel% equ 0 (
+    echo.
+    echo [✓] HOTOVO! Súbor SteamSetup.exe bol úspešne stiahnutý.
+    echo [i] Spúšťam inštalátor služby Steam...
+    start SteamSetup.exe
+    echo.
+    echo Nainštalujte Steam, prihláste sa (alebo vytvorte účet), spuste ho
+    echo a následne môžete spustiť vašu hru cez ${game.name}.exe!
+) else (
+    echo.
+    echo [X] Nepodarilo sa stiahnuť inštalátor priamo pomocou curl.
+    echo     Otváram oficiálnu webovú stránku pre manuálne stiahnutie...
+    start https://store.steampowered.com/about/
+)
+echo.
+echo ======================================================================
+echo HOTOVO / DONE!
+echo ======================================================================
+pause
+exit
+
+:web_steam
+echo.
+echo [i] Otváram webovú stránku Steam v prehliadači...
+start https://store.steampowered.com/about/
+echo Nainštalujte Steam, prihláste sa a potom spuste hru cez ${game.name}.exe!
+echo.
+echo ======================================================================
+echo HOTOVO / DONE!
+echo ======================================================================
+pause
+exit
+
+:continue_setup
+echo.
+echo Pokračujem bez inštalácie Steamu.
+echo Nezabudnite, že pre hranie hry musíte mať nainštalovaný a spustený Steam!
+echo.
+echo ======================================================================
+echo HOTOVO / DONE!
+echo ======================================================================
 pause
 exit`;
       folder.file('vipnut.bat', batContent);
-      
+
       setDownloadProgress(35);
-      
+
       const zipBlob = await zip.generateAsync({ type: 'blob' }, (metadata) => {
         setDownloadProgress(Math.floor(35 + metadata.percent * 0.65));
       });
-      
+
       const url = URL.createObjectURL(zipBlob);
       const cleanName = game.name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
       const filename = `tobipack_${cleanName}.zip`;
-      
+
       const link = document.createElement('a');
       link.href = url;
       link.download = filename;
@@ -462,7 +674,7 @@ exit`;
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
+
       setDownloadingGameId(null);
       setDownloadProgress(0);
     } catch (err) {
@@ -534,19 +746,19 @@ exit`;
       downloadLinks: [
         {
           name: 'Direct Speed Mirror (Instant Zip)',
-          url: `https://gofile.io/d/steamrip-${id}-direct.zip`,
+          url: `https://gofile.io/d/tobipack-${id}-direct.zip`,
           size: '12.4 GB',
           status: 'online'
         },
         {
           name: 'Immediate Torrent Magnet (No Redirects)',
-          url: `magnet:?xt=urn:btih:${id}steamrip&dn=${encodeURIComponent(gameName)}`,
+          url: `magnet:?xt=urn:btih:${id}tobipack&dn=${encodeURIComponent(gameName)}`,
           size: '12.4 GB',
           status: 'online'
         },
         {
           name: 'Premium Qiwi Direct (Single File)',
-          url: `https://qiwi.gg/file/direct/steamrip-${id}.zip`,
+          url: `https://qiwi.gg/file/direct/tobipack-${id}.zip`,
           size: '12.4 GB',
           status: 'online'
         }
@@ -577,7 +789,11 @@ exit`;
     if (selectedGenres.length === 0) return matchesSearch;
 
     const matchesGenre = selectedGenres.every(genre => {
-      if (genre === 'Popular') return !!game.isPopular || game.genres.includes('Popular');
+      if (genre === 'Popular' || genre === 'Populárne') {
+        return !!game.isPopular || game.genres.includes('Popular') || game.genres.includes('Populárne') || game.genres.includes('Populárne teraz');
+      }
+      if (genre === 'Hra') return !game.genres.includes('Aplikácia');
+      if (genre === 'Aplikácia') return game.genres.includes('Aplikácia');
       return game.genres.includes(genre);
     });
 
@@ -609,76 +825,77 @@ exit`;
     if (!searchQuery.trim()) return;
     
     const queryLower = searchQuery.toLowerCase().trim();
-    
-    // Find matching presets
-    const matchingPresets = STEAMRIP_INDEX_PRESETS.filter(name => 
-      name.toLowerCase().includes(queryLower)
-    );
-    
     let addedAny = false;
     const gamesToAdd: Game[] = [];
     
-    // 1. Process matching presets
-    for (const presetName of matchingPresets) {
-      const id = presetName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      if (!games.some(g => g.id === id)) {
-        const appId = findSteamAppId(presetName);
-        const coverUrl = getSteamCoverUrl(presetName);
-        const sizeStr = getRealisticSizeForGame(presetName);
-        const sizeGbMatch = sizeStr.match(/([\d.]+)\s*GB/i);
-        const sizeGb = sizeGbMatch ? parseFloat(sizeGbMatch[1]) : 15;
-        
-        const newGame: Game = {
-          id,
-          name: presetName,
-          description: `${presetName} is pre-installed, pre-cracked, and optimized for immediate high-speed download. This clean distribution contains all recent updates and original DLC contents. Windows Defender verified and fully tested.`,
-          releaseDate: 'Latest Version',
-          developer: 'TobiPack Mirror system',
-          genres: getGenresForGame(presetName),
-          steamId: appId ? String(appId) : undefined,
-          coverUrl,
-          size: sizeStr,
-          version: 'v1.0.4 Direct-Rip',
-          isPopular: presetName.toLowerCase().includes('minecraft') || presetName.toLowerCase().includes('gta'),
-          requirements: {
-            minimum: {
-              os: 'Windows 10 64-Bit',
-              processor: 'Intel Core i5-3470 or AMD FX-8350',
-              memory: '8 GB RAM',
-              graphics: 'NVIDIA GTX 760 or AMD Radeon R9 270X',
-              storage: `${Math.ceil(sizeGb + 2)} GB available space`
+    if (platform === 'pc') {
+      // Find matching presets
+      const matchingPresets = TOBIPACK_INDEX_PRESETS.filter(name => 
+        name.toLowerCase().includes(queryLower)
+      );
+      
+      // 1. Process matching presets
+      for (const presetName of matchingPresets) {
+        const id = presetName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        if (!games.some(g => g.id === id)) {
+          const appId = findSteamAppId(presetName);
+          const coverUrl = getSteamCoverUrl(presetName);
+          const sizeStr = getRealisticSizeForGame(presetName);
+          const sizeGbMatch = sizeStr.match(/([\d.]+)\s*GB/i);
+          const sizeGb = sizeGbMatch ? parseFloat(sizeGbMatch[1]) : 15;
+          
+          const newGame: Game = {
+            id,
+            name: presetName,
+            description: `${presetName} is pre-installed, pre-cracked, and optimized for immediate high-speed download. This clean distribution contains all recent updates and original DLC contents. Windows Defender verified and fully tested.`,
+            releaseDate: 'Latest Version',
+            developer: 'TobiPack Mirror system',
+            genres: getGenresForGame(presetName),
+            steamId: appId ? String(appId) : undefined,
+            coverUrl,
+            size: sizeStr,
+            version: 'v1.0.4 Direct-Rip',
+            isPopular: presetName.toLowerCase().includes('minecraft') || presetName.toLowerCase().includes('gta'),
+            requirements: {
+              minimum: {
+                os: 'Windows 10 64-Bit',
+                processor: 'Intel Core i5-3470 or AMD FX-8350',
+                memory: '8 GB RAM',
+                graphics: 'NVIDIA GTX 760 or AMD Radeon R9 270X',
+                storage: `${Math.ceil(sizeGb + 2)} GB available space`
+              },
+              recommended: {
+                os: 'Windows 10/11 64-Bit',
+                processor: 'Intel Core i7-8700 or AMD Ryzen 5 3600',
+                memory: '16 GB RAM',
+                graphics: 'NVIDIA GTX 1070 or AMD Radeon RX 5600 XT',
+                storage: `${Math.ceil(sizeGb + 2)} GB available space (SSD Recommended)`
+              }
             },
-            recommended: {
-              os: 'Windows 10/11 64-Bit',
-              processor: 'Intel Core i7-8700 or AMD Ryzen 5 3600',
-              memory: '16 GB RAM',
-              graphics: 'NVIDIA GTX 1070 or AMD Radeon RX 5600 XT',
-              storage: `${Math.ceil(sizeGb + 2)} GB available space (SSD Recommended)`
-            }
-          },
-          downloadLinks: [
-            {
-              name: 'Direct Speed Mirror (Instant Zip)',
-              url: `https://gofile.io/d/tobipack-${id}-direct.zip`,
-              size: sizeStr,
-              status: 'online'
-            },
-            {
-              name: 'Immediate Torrent Magnet (No Redirects)',
-              url: `magnet:?xt=urn:btih:${id}tobipack&dn=${encodeURIComponent(presetName)}`,
-              size: sizeStr,
-              status: 'online'
-            },
-            {
-              name: 'Premium Qiwi Direct (Single File)',
-              url: `https://qiwi.gg/file/direct/tobipack-${id}.zip`,
-              size: sizeStr,
-              status: 'online'
-            }
-          ]
-        };
-        gamesToAdd.push(newGame);
-        addedAny = true;
+            downloadLinks: [
+              {
+                name: 'Direct Speed Mirror (Instant Zip)',
+                url: `https://gofile.io/d/tobipack-${id}-direct.zip`,
+                size: sizeStr,
+                status: 'online'
+              },
+              {
+                name: 'Immediate Torrent Magnet (No Redirects)',
+                url: `magnet:?xt=urn:btih:${id}tobipack&dn=${encodeURIComponent(presetName)}`,
+                size: sizeStr,
+                status: 'online'
+              },
+              {
+                name: 'Premium Qiwi Direct (Single File)',
+                url: `https://qiwi.gg/file/direct/tobipack-${id}.zip`,
+                size: sizeStr,
+                status: 'online'
+              }
+            ]
+          };
+          gamesToAdd.push(newGame);
+          addedAny = true;
+        }
       }
     }
     
@@ -698,19 +915,17 @@ exit`;
         return [...prev, ...filteredToAdd];
       });
     }
-  }, [searchQuery, apiSuggestions]);
+  }, [searchQuery, apiSuggestions, platform]);
 
   const totalGamesCount = sortedGames.length;
-  const totalPages = Math.ceil(totalGamesCount / gamesPerPage);
-  const startIndex = (currentPage - 1) * gamesPerPage;
-  const paginatedGames = sortedGames.slice(startIndex, startIndex + gamesPerPage);
+  const paginatedGames = sortedGames.slice(0, visibleCount);
 
   const matchedLoaded = searchQuery.trim()
     ? games.filter(g => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : [];
 
-  const matchedPresets = searchQuery.trim()
-    ? STEAMRIP_INDEX_PRESETS.filter(name =>
+  const matchedPresets = (platform === 'pc' && searchQuery.trim())
+    ? TOBIPACK_INDEX_PRESETS.filter(name =>
         name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         !games.some(g => g.name.toLowerCase() === name.toLowerCase())
       ).map(name => {
@@ -787,7 +1002,7 @@ exit`;
                   PC Hry (Hore / Top)
                 </h2>
                 <p className="text-slate-400 text-xs sm:text-sm mt-3 leading-relaxed">
-                  Stiahnite si tisíce overených, pred-inštalovaných PC hier z indexov SteamRIP. Žiadne inštalátory, žiadne DRM, stačí stiahnuť zip, rozbaliť a spustiť.
+                  Stiahnite si tisíce overených, pred-inštalovaných PC hier z indexov TobiPack. Žiadne inštalátory, žiadne DRM, stačí stiahnuť zip, rozbaliť a spustiť.
                 </p>
               </div>
               <div className="mt-8 flex items-center justify-between border-t border-slate-800/80 pt-4">
@@ -982,40 +1197,16 @@ exit`;
               </div>
 
               {/* Game Hero Header Banner */}
-              <div className="relative rounded-xl overflow-hidden border border-[#222736] h-64 md:h-96 group">
-                {/* Hero Banner Image */}
+              <div className="relative rounded-xl overflow-hidden border border-[#222736] bg-gradient-to-br from-[#121626] to-[#07090e] h-48 md:h-64 group">
                 <div className="absolute inset-0">
-                  <img
-                    src={selectedGame.steamId ? `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${selectedGame.steamId}/library_hero.jpg` : selectedGame.coverUrl}
-                    alt={selectedGame.name}
-                    className="w-full h-full object-cover object-top scale-100 group-hover:scale-[1.01] transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      // Fallback to header if hero fails
-                      if (selectedGame.steamId) {
-                        e.currentTarget.src = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${selectedGame.steamId}/header.jpg`;
-                      } else {
-                        e.currentTarget.src = getFallbackCover(selectedGame.name);
-                      }
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-[#090a0f]/40 to-transparent"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#090a0f] via-transparent to-transparent"></div>
+                  <div className={`absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,${
+                    platform === 'mobile' ? 'rgba(34,211,238,0.06)' : 'rgba(164,242,29,0.06)'
+                  },transparent_60%)]`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-transparent to-transparent" />
                 </div>
 
-                {/* Cover & Hero Content Overlay */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-10 flex flex-col md:flex-row items-end gap-6 w-full">
-                  <div className="hidden md:block w-40 h-56 rounded-lg overflow-hidden border-2 border-[#1f2330] shadow-2xl flex-shrink-0">
-                    <img
-                      src={selectedGame.coverUrl}
-                      alt={`${selectedGame.name} Cover`}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        e.currentTarget.src = getFallbackCover(selectedGame.name);
-                      }}
-                    />
-                  </div>
+                {/* Hero Content Overlay */}
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 flex flex-col md:flex-row items-end gap-6 w-full">
                   <div className="space-y-3 flex-1">
                     <div className="flex flex-wrap gap-2">
                       {selectedGame.genres.map(genre => (
@@ -1074,25 +1265,7 @@ exit`;
                     </div>
                   </div>
 
-                  {/* Screenshots gallery */}
-                  {selectedGame.screenshots && selectedGame.screenshots.length > 0 && (
-                    <div className="bg-[#0e1017] p-6 rounded-xl border border-[#1c202d] space-y-4">
-                      <h2 className="text-xl font-bold border-l-4 border-[#a4f21d] pl-3">Screenshots</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        {selectedGame.screenshots.map((ss, idx) => (
-                          <div key={idx} className="rounded-lg overflow-hidden border border-[#1f2436] bg-[#121520] aspect-video group cursor-pointer">
-                            <img
-                              src={ss}
-                              alt={`${selectedGame.name} Screenshot ${idx + 1}`}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              referrerPolicy="no-referrer"
-                              onClick={() => window.open(ss, '_blank')}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+
 
                   {/* System Requirements Comparison Side-by-Side */}
                   <div className="bg-[#0e1017] p-6 rounded-xl border border-[#1c202d] space-y-4">
@@ -1226,7 +1399,7 @@ exit`;
                               <div className="text-right">
                                 <span className="text-xs font-mono text-slate-400 block">{link.size || selectedGame.size}</span>
                                 <span className="text-[10px] text-[#a4f21d]/75 font-mono group-hover:text-[#a4f21d] transition-colors flex items-center justify-end gap-0.5">
-                                  Stiahnuť ZIP <Download className="w-2.5 h-2.5" />
+                                  {platform === 'mobile' ? 'Stiahnuť APK' : 'Stiahnuť ZIP'} <Download className="w-2.5 h-2.5" />
                                 </span>
                               </div>
                             </button>
@@ -1552,20 +1725,14 @@ exit`;
               {!searchQuery && selectedGenres.length === 0 && (
                 <div
                   onClick={() => setSelectedGame(featuredGame)}
-                  className="relative rounded-2xl overflow-hidden border border-[#23293c] bg-[#0c0d12] cursor-pointer group shadow-2xl transition-all hover:shadow-[#a4f21d]/5"
+                  className="relative rounded-2xl overflow-hidden border border-[#23293c] bg-gradient-to-br from-[#121626] to-[#0a0d14] cursor-pointer group shadow-2xl transition-all hover:shadow-[#a4f21d]/5"
                 >
                   <div className="absolute inset-0">
-                    <img
-                      src={`https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${featuredGame.steamId}/library_hero.jpg`}
-                      alt="Featured Game Cover"
-                      className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-[#090a0f]/40 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#090a0f] via-[#090a0f]/40 to-transparent"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(164,242,29,0.06),transparent_60%)]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-transparent to-transparent"></div>
                   </div>
 
-                  <div className="relative p-6 md:p-12 space-y-4 max-w-2xl h-64 md:h-[420px] flex flex-col justify-end">
+                  <div className="relative p-6 md:p-12 space-y-4 max-w-2xl h-64 md:h-[320px] flex flex-col justify-end">
                     <div className="flex items-center gap-2">
                       <span className="bg-[#a4f21d] text-black text-[10px] font-mono font-bold tracking-widest px-2.5 py-1 rounded uppercase">
                         Feature Pack
@@ -1575,7 +1742,7 @@ exit`;
                       </span>
                     </div>
                     <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white group-hover:text-[#a4f21d] transition-colors">{featuredGame.name}</h1>
-                    <p className="hidden md:block text-slate-300 text-sm leading-relaxed line-clamp-3">
+                    <p className="hidden md:block text-slate-300 text-sm leading-relaxed line-clamp-2">
                       {featuredGame.description}
                     </p>
                     <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
@@ -1589,37 +1756,106 @@ exit`;
 
               {/* Browse Vault Section with filter bar & AI auto porter trigger */}
               <div className="space-y-6">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div className="space-y-1">
-                    <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                      <Gamepad2 className="text-[#a4f21d] w-6 h-6" />
-                      <span>PC Pre-Installed Games</span>
-                    </h2>
-                    <p className="text-xs text-slate-500 font-mono">
-                      All <span className="text-[#a4f21d] font-bold">4,219+</span> TobiPack games indexed. Type any game to load instant download links!
-                    </p>
-                    <div className="flex items-center gap-2 pt-1">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-[10px] text-emerald-400 font-mono uppercase tracking-wider font-semibold">
-                        TobiPack Live Sync: Automaticky prepojené so SteamRIP. Každá nová hra je ihneď dostupná!
-                      </span>
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                  {platform === 'mobile' ? (
+                    <div className="space-y-3.5 w-full">
+                      <div className="space-y-1">
+                        <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                          <Smartphone className="text-cyan-400 w-6 h-6 animate-pulse" />
+                          <span>TobiPack Mobile Store</span>
+                        </h2>
+                        <p className="text-xs text-slate-500 font-mono">
+                          Stiahnite si prémiové, preverené mobilné hry a aplikácie úplne zadarmo!
+                        </p>
+                        <div className="flex items-center gap-2 pt-1">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                          </span>
+                          <span className="text-[10px] text-cyan-400 font-mono uppercase tracking-wider font-semibold">
+                            Softonic Live Crawler: Prepojené s databázou Softonic. Zadaj akýkoľvek názov do vyhľadávania a systém ho stiahne!
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Games / Apps primary category tabs */}
+                      <div className="flex items-center gap-1.5 bg-[#090b10] p-1 rounded-xl border border-[#1b2132] max-w-sm">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileCategory('all');
+                            setSelectedGenres([]); // Reset current active filter tags
+                          }}
+                          className={`flex-1 py-2 px-3 rounded-lg font-bold font-mono text-xs flex items-center justify-center gap-1 transition-all cursor-pointer ${
+                            mobileCategory === 'all'
+                              ? 'bg-cyan-500 text-black font-extrabold shadow shadow-cyan-500/20'
+                              : 'text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          🌐 Všetko
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileCategory('games');
+                            setSelectedGenres([]); // Reset current active filter tags
+                          }}
+                          className={`flex-1 py-2 px-3 rounded-lg font-bold font-mono text-xs flex items-center justify-center gap-1 transition-all cursor-pointer ${
+                            mobileCategory === 'games'
+                              ? 'bg-cyan-500 text-black font-extrabold shadow shadow-cyan-500/20'
+                              : 'text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          🎮 Hry
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileCategory('apps');
+                            setSelectedGenres([]); // Reset current active filter tags
+                          }}
+                          className={`flex-1 py-2 px-3 rounded-lg font-bold font-mono text-xs flex items-center justify-center gap-1 transition-all cursor-pointer ${
+                            mobileCategory === 'apps'
+                              ? 'bg-cyan-500 text-black font-extrabold shadow shadow-cyan-500/20'
+                              : 'text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          📱 Aplikácie
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                        <Gamepad2 className="text-[#a4f21d] w-6 h-6" />
+                        <span>PC Pre-Installed Games</span>
+                      </h2>
+                      <p className="text-xs text-slate-500 font-mono">
+                        All <span className="text-[#a4f21d] font-bold">4,219+</span> TobiPack games indexed. Type any game to load instant download links!
+                      </p>
+                      <div className="flex items-center gap-2 pt-1">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span className="text-[10px] text-emerald-400 font-mono uppercase tracking-wider font-semibold">
+                          TobiPack Live Sync: Automaticky prepojené so servermi TobiPack. Každá nová hra je ihneď dostupná!
+                        </span>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Search and Download Launcher bar */}
                   <div className="flex flex-col sm:flex-row items-stretch gap-2 w-full md:max-w-md">
                     <div className="relative flex-1">
                       {isSearchingApi ? (
-                        <Loader2 className="absolute left-3.5 top-3 w-4 h-4 text-[#a4f21d] animate-spin" />
+                        <Loader2 className={`absolute left-3.5 top-3 w-4 h-4 animate-spin ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} />
                       ) : (
                         <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
                       )}
                       <input
                         type="text"
-                        placeholder="Search game catalog..."
+                        placeholder={platform === 'mobile' ? "Hľadať hry a aplikácie zo Softonic..." : "Vyhľadať hry v databáze..."}
                         value={searchQuery}
                         onChange={(e) => {
                           setSearchQuery(e.target.value);
@@ -1632,7 +1868,9 @@ exit`;
                             setShowSuggestions(false);
                           }
                         }}
-                        className="w-full bg-[#0e1017] border border-[#1b2132] focus:border-[#a4f21d] rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none font-mono"
+                        className={`w-full bg-[#0e1017] border border-[#1b2132] rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none font-mono transition-colors ${
+                          platform === 'mobile' ? 'focus:border-cyan-400' : 'focus:border-[#a4f21d]'
+                        }`}
                       />
 
                       {/* Autocomplete / Suggestions Dropdown */}
@@ -1665,26 +1903,30 @@ exit`;
                                   setSearchQuery('');
                                   setShowSuggestions(false);
                                 }}
-                                className="w-full px-4 py-2.5 text-left text-xs font-mono text-slate-200 hover:bg-[#121622] hover:text-[#a4f21d] flex items-center justify-between transition-colors"
+                                className={`w-full px-4 py-2.5 text-left text-xs font-mono text-slate-200 hover:bg-[#121622] flex items-center justify-between transition-colors ${
+                                  platform === 'mobile' ? 'hover:text-cyan-400' : 'hover:text-[#a4f21d]'
+                                }`}
                               >
                                 <div className="flex items-center gap-2">
-                                  {isPresetItem ? (
-                                    <img src={s.coverUrl} className="w-6 h-8 object-cover rounded shadow border border-[#232a3f]" alt="" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = getFallbackCover(s.name); }} />
-                                  ) : (
-                                    <img src={s.coverUrl} className="w-6 h-8 object-cover rounded shadow" alt="" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = getFallbackCover(s.name); }} />
-                                  )}
+                                  <div className="w-6 h-8 rounded bg-[#161a26] border border-[#232a3f] flex items-center justify-center flex-shrink-0">
+                                    {isPresetItem ? (
+                                      <Gamepad2 className={`w-3.5 h-3.5 ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} />
+                                    ) : (
+                                      <Smartphone className="w-3.5 h-3.5 text-cyan-400" />
+                                    )}
+                                  </div>
                                   <div className="flex flex-col">
                                     <span className="font-bold truncate max-w-[180px]">{s.name}</span>
                                     {isPresetItem && (
                                       <span className="text-[9px] text-slate-400 flex items-center gap-0.5">
-                                        <ShieldCheck className="w-2.5 h-2.5 text-[#a4f21d]" /> TobiPack Database Verified
+                                        <ShieldCheck className={`w-2.5 h-2.5 ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} /> TobiPack Database Verified
                                       </span>
                                     )}
                                   </div>
                                 </div>
                                 <span className={`text-[10px] px-2 py-0.5 rounded border ${
                                   isPresetItem 
-                                    ? 'text-[#a4f21d] bg-[#121a14] border-[#1f3b1e]' 
+                                    ? (platform === 'mobile' ? 'text-cyan-400 bg-[#0e1724] border-cyan-950' : 'text-[#a4f21d] bg-[#121a14] border-[#1f3b1e]') 
                                     : 'text-slate-400 bg-[#12141c] border-[#1c2235]'
                                   }`}>
                                   {s.size}
@@ -1697,8 +1939,13 @@ exit`;
                     </div>
                     {searchQuery && (
                       <button
+                        type="button"
                         onClick={() => setShowSuggestions(false)}
-                        className="bg-[#a4f21d] text-black hover:bg-[#b4f738] px-5 py-2.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer flex-shrink-0"
+                        className={`${
+                          platform === 'mobile'
+                            ? 'bg-cyan-400 hover:bg-cyan-300'
+                            : 'bg-[#a4f21d] hover:bg-[#b4f738]'
+                        } text-black px-5 py-2.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer flex-shrink-0`}
                       >
                         <Search className="w-3.5 h-3.5" />
                         <span>Vyhľadať</span>
@@ -1710,41 +1957,147 @@ exit`;
                 {/* Genre Tag Selection row */}
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none font-mono">
-                    {GENRES_LIST.map(genre => {
-                      const isActive = genre === 'All Games' 
-                        ? selectedGenres.length === 0 
-                        : selectedGenres.includes(genre);
-                      
-                      return (
-                        <button
-                          key={genre}
-                          onClick={() => {
-                            if (genre === 'All Games') {
-                              setSelectedGenres([]);
-                            } else {
-                              setSelectedGenres(prev => 
-                                prev.includes(genre) 
-                                  ? prev.filter(g => g !== genre) 
-                                  : [...prev, genre]
-                              );
-                            }
-                          }}
-                          className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-1 cursor-pointer border ${
-                            isActive
-                              ? 'bg-[#a4f21d] text-black font-extrabold border-[#a4f21d]'
-                              : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b]'
-                          }`}
-                        >
-                          <span>{genre}</span>
-                          {isActive && genre !== 'All Games' && (
-                            <span className="text-[10px] opacity-75 font-black">×</span>
-                          )}
-                        </button>
-                      );
-                    })}
+                    {platform === 'mobile' ? (
+                      mobileCategory === 'all' ? (
+                        [
+                          { label: 'Všetko', genre: null },
+                          { label: 'Hry 🎮', genre: 'Hra' },
+                          { label: 'Aplikácie 📱', genre: 'Aplikácia' },
+                          { label: 'Populárne teraz 🔥', genre: 'Popular' },
+                          { label: 'Prehliadať populárne ⭐', genre: 'Populárne' },
+                          { label: 'Akčné / Sandbox ⚔️', genre: 'Action' },
+                          { label: 'Sandbox / RPG 🌍', genre: 'Sandbox' },
+                          { label: 'Kreslenie a Grafika 🎨', genre: 'Kreslenie' },
+                          { label: 'Prehliadače 🌐', genre: 'Prehliadače' },
+                          { label: 'Nástroje / Produktivita ⚙️', genre: 'Nástroje' },
+                        ].map(subcat => {
+                          const isActive = subcat.genre === null 
+                            ? selectedGenres.length === 0 
+                            : selectedGenres.includes(subcat.genre);
+                          return (
+                            <button
+                              key={subcat.label}
+                              type="button"
+                              onClick={() => {
+                                if (subcat.genre === null) {
+                                  setSelectedGenres([]);
+                                } else {
+                                  setSelectedGenres([subcat.genre]);
+                                }
+                              }}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-1 cursor-pointer border ${
+                                isActive
+                                  ? 'bg-cyan-400 text-black font-extrabold border-cyan-400 shadow-sm shadow-cyan-400/20'
+                                  : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b]'
+                              }`}
+                            >
+                              <span>{subcat.label}</span>
+                            </button>
+                          );
+                        })
+                      ) : mobileCategory === 'games' ? (
+                        [
+                          { label: 'Všetky hry', genre: null },
+                          { label: 'Populárne teraz 🔥', genre: 'Popular' },
+                          { label: 'Akčné / Arkády ⚔️', genre: 'Action' },
+                          { label: 'Sandbox & RPG 🌍', genre: 'Sandbox' },
+                          { label: 'Stratégie 🧠', genre: 'Strategy' },
+                        ].map(subcat => {
+                          const isActive = subcat.genre === null 
+                            ? selectedGenres.length === 0 
+                            : selectedGenres.includes(subcat.genre);
+                          return (
+                            <button
+                              key={subcat.label}
+                              type="button"
+                              onClick={() => {
+                                if (subcat.genre === null) {
+                                  setSelectedGenres([]);
+                                } else {
+                                  setSelectedGenres([subcat.genre]); // Toggled for single selection filter
+                                }
+                              }}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-1 cursor-pointer border ${
+                                isActive
+                                  ? 'bg-cyan-400 text-black font-extrabold border-cyan-400 shadow-sm shadow-cyan-400/20'
+                                  : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b]'
+                              }`}
+                            >
+                              <span>{subcat.label}</span>
+                            </button>
+                          );
+                        })
+                      ) : (
+                        [
+                          { label: 'Všetky aplikácie', genre: null },
+                          { label: 'Prehliadať populárne ⭐', genre: 'Populárne' },
+                          { label: 'Kreslenie a Grafika 🎨', genre: 'Kreslenie' },
+                          { label: 'Prehliadače 🌐', genre: 'Prehliadače' },
+                          { label: 'Nástroje / Produktivita ⚙️', genre: 'Nástroje' },
+                        ].map(subcat => {
+                          const isActive = subcat.genre === null 
+                            ? selectedGenres.length === 0 
+                            : selectedGenres.includes(subcat.genre);
+                          return (
+                            <button
+                              key={subcat.label}
+                              type="button"
+                              onClick={() => {
+                                if (subcat.genre === null) {
+                                  setSelectedGenres([]);
+                                } else {
+                                  setSelectedGenres([subcat.genre]);
+                                }
+                              }}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-1 cursor-pointer border ${
+                                isActive
+                                  ? 'bg-cyan-400 text-black font-extrabold border-cyan-400 shadow-sm shadow-cyan-400/20'
+                                  : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b]'
+                              }`}
+                            >
+                              <span>{subcat.label}</span>
+                            </button>
+                          );
+                        })
+                      )
+                    ) : (
+                      GENRES_LIST.map(genre => {
+                        const isActive = genre === 'All Games' 
+                          ? selectedGenres.length === 0 
+                          : selectedGenres.includes(genre);
+                        
+                        return (
+                          <button
+                            key={genre}
+                            type="button"
+                            onClick={() => {
+                              if (genre === 'All Games') {
+                                setSelectedGenres([]);
+                              } else {
+                                setSelectedGenres(prev => 
+                                  prev.includes(genre) 
+                                    ? prev.filter(g => g !== genre) 
+                                    : [...prev, genre]
+                                );
+                              }
+                            }}
+                            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-1 cursor-pointer border ${
+                              isActive
+                                ? 'bg-[#a4f21d] text-black font-extrabold border-[#a4f21d]'
+                                : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b]'
+                            }`}
+                          >
+                            <span>{genre}</span>
+                            {isActive && genre !== 'All Games' && (
+                              <span className="text-[10px] opacity-75 font-black">×</span>
+                            )}
+                          </button>
+                        );
+                      })
+                    )}
                   </div>
                   <p className="text-[10px] text-slate-500 font-mono">
-                    💡 <span className="text-slate-400">Multi-Select Active:</span> Vyber viacero kategórií naraz pre presnejšie filtrovanie hier!
+                    💡 <span className="text-slate-400">TobiPack Navigácia:</span> {platform === 'mobile' ? 'Prepínajte medzi kategóriami a podkategóriami pre rýchly prístup k aplikáciám a hrám!' : 'Vyber viacero kategórií naraz pre presnejšie filtrovanie hier!'}
                   </p>
                 </div>
 
@@ -1752,11 +2105,6 @@ exit`;
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0a0c12]/60 border border-[#1b2132] p-4 rounded-xl font-mono text-xs">
                   <div className="text-slate-400">
                     <span className="text-white font-bold">{totalGamesCount}</span> {totalGamesCount === 1 ? 'hra nájdená' : totalGamesCount < 5 ? 'hry nájdené' : 'hier nájdených'} 
-                    {totalGamesCount > 0 && (
-                      <span className="text-slate-500">
-                        {' '}(Zoznam {currentPage} z {totalPages || 1})
-                      </span>
-                    )}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2.5">
@@ -1767,7 +2115,7 @@ exit`;
                         onClick={() => setSortBy('rating')}
                         className={`px-2.5 py-1 rounded-md transition-all text-xs flex items-center gap-1 cursor-pointer font-bold ${
                           sortBy === 'rating'
-                            ? 'bg-[#a4f21d] text-black font-extrabold'
+                            ? (platform === 'mobile' ? 'bg-cyan-400 text-black font-extrabold shadow-sm' : 'bg-[#a4f21d] text-black font-extrabold')
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -1778,7 +2126,7 @@ exit`;
                         onClick={() => setSortBy('size')}
                         className={`px-2.5 py-1 rounded-md transition-all text-xs flex items-center gap-1 cursor-pointer font-bold ${
                           sortBy === 'size'
-                            ? 'bg-[#a4f21d] text-black font-extrabold'
+                            ? (platform === 'mobile' ? 'bg-cyan-400 text-black font-extrabold shadow-sm' : 'bg-[#a4f21d] text-black font-extrabold')
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -1789,7 +2137,7 @@ exit`;
                         onClick={() => setSortBy('downloads')}
                         className={`px-2.5 py-1 rounded-md transition-all text-xs flex items-center gap-1 cursor-pointer font-bold ${
                           sortBy === 'downloads'
-                            ? 'bg-[#a4f21d] text-black font-extrabold'
+                            ? (platform === 'mobile' ? 'bg-cyan-400 text-black font-extrabold shadow-sm' : 'bg-[#a4f21d] text-black font-extrabold')
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -1800,7 +2148,7 @@ exit`;
                         onClick={() => setSortBy('name')}
                         className={`px-2.5 py-1 rounded-md transition-all text-xs flex items-center gap-1 cursor-pointer font-bold ${
                           sortBy === 'name'
-                            ? 'bg-[#a4f21d] text-black font-extrabold'
+                            ? (platform === 'mobile' ? 'bg-cyan-400 text-black font-extrabold shadow-sm' : 'bg-[#a4f21d] text-black font-extrabold')
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -1836,123 +2184,89 @@ exit`;
                         <div
                           key={game.id}
                           onClick={() => setSelectedGame(game)}
-                          className="bg-[#0e1017] border border-[#1a1e2b] rounded-xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-lime-950/5 hover:border-[#a4f21d] transition-all flex flex-col relative"
+                          className={`bg-[#0c0e15] border border-[#1a1e2b] rounded-xl p-4 group cursor-pointer shadow-lg transition-all flex flex-col justify-between min-h-[175px] hover:bg-[#111420] ${
+                            platform === 'mobile' 
+                              ? 'hover:shadow-cyan-950/10 hover:border-cyan-400' 
+                              : 'hover:shadow-lime-950/10 hover:border-[#a4f21d]'
+                          }`}
                         >
-                          {/* Game Card Cover Image */}
-                          <div className="aspect-[2/3] w-full overflow-hidden bg-[#11131c] relative">
-                            <img
-                              src={game.coverUrl}
-                              alt={`${game.name} Card Art`}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              referrerPolicy="no-referrer"
-                              loading="lazy"
-                              onError={(e) => {
-                                e.currentTarget.src = getFallbackCover(game.name);
-                              }}
-                            />
-                            
-                            {/* Size label tag */}
-                            <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm text-white text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">
-                              {game.size}
-                            </div>
-
-                            {/* Top-left labels */}
-                            <div className="absolute top-2 left-2 flex flex-col gap-1.5">
-                              {game.isAiGenerated && (
-                                <span className="bg-purple-900 text-purple-100 text-[8px] font-bold font-mono px-1.5 py-0.5 rounded border border-purple-500/30 flex items-center gap-0.5 shadow">
-                                  <Sparkles className="w-2 h-2" />
-                                  <span>AI</span>
-                                </span>
-                              )}
-                              <span className="bg-[#a4f21d] text-black text-[8px] font-black font-mono px-1.5 py-0.5 rounded uppercase shadow">
-                                FREE
+                          <div className="space-y-3">
+                            {/* Top row - genre label, rating tag */}
+                            <div className="flex items-center justify-between text-[10px] font-mono leading-none">
+                              <span className="text-slate-500 uppercase tracking-wider font-bold truncate max-w-[65%]">
+                                {game.genres.slice(0, 2).join(' / ')}
                               </span>
-                            </div>
-                          </div>
-
-                          {/* Game Card Info */}
-                          <div className="p-3.5 space-y-1 flex-1 flex flex-col justify-between">
-                            <div>
-                              <div className="flex items-center justify-between gap-1 mb-1 leading-none">
-                                <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider block font-bold truncate max-w-[70%]">
-                                  {game.genres.slice(0, 2).join(' / ')}
+                              <div className="flex items-center gap-2">
+                                <span className="text-slate-400 font-bold bg-[#141824] px-1.5 py-0.5 rounded border border-[#20273c]">
+                                  {game.size}
                                 </span>
                                 {game.rating && (
-                                  <span className="text-[10px] font-mono text-[#a4f21d] flex items-center gap-0.5 font-extrabold flex-shrink-0">
+                                  <span className={`font-extrabold flex items-center gap-0.5 ${
+                                    platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'
+                                  }`}>
                                     ★ {game.rating}
                                   </span>
                                 )}
                               </div>
-                              <h3 className="text-sm font-bold text-slate-100 leading-snug tracking-tight group-hover:text-[#a4f21d] transition-colors line-clamp-1">
-                                {game.name}
-                              </h3>
                             </div>
-                            
-                            <div className="pt-2 flex items-center justify-between text-[10px] text-slate-500 font-mono border-t border-[#161a26]/60">
-                              <span className="flex items-center gap-1">
-                                <span>{game.version.split(' ')[0]}</span>
-                                {game.downloadsCount && (
-                                  <span className="text-[9px] text-slate-400">({(game.downloadsCount / 1000).toFixed(0)}k 📥)</span>
+
+                            {/* Center block - Name, Developer, Badge */}
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <h3 className="text-sm font-bold text-slate-100 leading-snug tracking-tight transition-colors line-clamp-1 group-hover:text-white">
+                                  {game.name}
+                                </h3>
+                                {game.isAiGenerated && (
+                                  <span className="bg-purple-900/60 text-purple-100 text-[8px] font-bold font-mono px-1.5 py-0.5 rounded border border-purple-500/20 flex items-center gap-0.5">
+                                    <Sparkles className="w-2 h-2" />
+                                    <span>AI</span>
+                                  </span>
                                 )}
-                              </span>
-                              <span className="text-[#a4f21d] flex items-center gap-0.5">
-                                Extract & Play <Download className="w-2.5 h-2.5" />
-                              </span>
+                              </div>
+                              <p className="text-[10px] text-slate-500 font-mono truncate leading-none">
+                                {game.developer}
+                              </p>
                             </div>
+
+                            {/* Description block */}
+                            <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                              {game.description}
+                            </p>
+                          </div>
+
+                          {/* Footer row - version/downloads, action */}
+                          <div className="pt-3.5 flex items-center justify-between text-[10px] text-slate-400 font-mono border-t border-[#1a2032] mt-1.5">
+                            <span className="flex items-center gap-1">
+                              <span>Verzia: {game.version.split(' ')[0]}</span>
+                              {game.downloadsCount && (
+                                <span className="text-[9px] text-slate-500">({(game.downloadsCount / 1000).toFixed(0)}k 📥)</span>
+                              )}
+                            </span>
+                            <span className={`flex items-center gap-1 font-bold ${
+                              platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'
+                            }`}>
+                              {platform === 'mobile' ? (mobileCategory === 'apps' ? 'Inštalovať' : 'Stiahnuť') : 'Stiahnuť'} <Download className="w-3 h-3" />
+                            </span>
                           </div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Pagination control section */}
-                    {totalPages > 1 && (
-                      <div className="flex flex-wrap items-center justify-center gap-2 pt-6 border-t border-[#1c2235] font-mono">
+                    {visibleCount < totalGamesCount && (
+                      <div className="flex justify-center pt-8">
                         <button
-                          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                          disabled={currentPage === 1}
-                          className="px-3.5 py-2 rounded-lg text-xs font-bold transition-all border border-[#171c2b] bg-[#0f1118] text-slate-400 hover:text-white hover:border-slate-700 disabled:opacity-40 disabled:hover:border-[#171c2b] disabled:hover:text-slate-400 cursor-pointer"
+                          onClick={() => setVisibleCount(prev => prev + 40)}
+                          className={`px-8 py-3.5 rounded-xl text-xs font-bold font-mono transition-all border cursor-pointer flex items-center gap-2 shadow-lg ${
+                            platform === 'mobile'
+                              ? 'bg-[#0f121d] border-cyan-500/20 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-cyan-950/20'
+                              : 'bg-[#0f121d] border-[#a4f21d]/20 text-[#a4f21d] hover:bg-[#a4f21d]/10 hover:border-[#a4f21d] hover:shadow-lime-950/20'
+                          }`}
                         >
-                          &larr; Predošlý
-                        </button>
-
-                        {Array.from({ length: totalPages }).map((_, idx) => {
-                          const pageNum = idx + 1;
-                          const isActive = currentPage === pageNum;
-                          
-                          // Restrict shown pages to first, last, and window around current
-                          const shouldShow = 
-                            pageNum === 1 || 
-                            pageNum === totalPages || 
-                            Math.abs(pageNum - currentPage) <= 2;
-                          
-                          if (!shouldShow) {
-                            if (pageNum === 2 || pageNum === totalPages - 1) {
-                              return <span key={pageNum} className="text-slate-600 px-1">...</span>;
-                            }
-                            return null;
-                          }
-
-                          return (
-                            <button
-                              key={pageNum}
-                              onClick={() => setCurrentPage(pageNum)}
-                              className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all border ${
-                                isActive
-                                  ? 'bg-[#a4f21d] text-black border-[#a4f21d] font-extrabold shadow-lg shadow-[#a4f21d]/10'
-                                  : 'bg-[#0f1118] text-slate-400 hover:text-white border-[#171c2b] hover:border-slate-700'
-                              } cursor-pointer`}
-                            >
-                              Zoznam {pageNum}
-                            </button>
-                          );
-                        })}
-
-                        <button
-                          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                          disabled={currentPage === totalPages}
-                          className="px-3.5 py-2 rounded-lg text-xs font-bold transition-all border border-[#171c2b] bg-[#0f1118] text-slate-400 hover:text-white hover:border-slate-700 disabled:opacity-40 disabled:hover:border-[#171c2b] disabled:hover:text-slate-400 cursor-pointer"
-                        >
-                          Ďalší &rarr;
+                          <Download className="w-4 h-4 animate-bounce" />
+                          <span>Zobraziť ďalšie {platform === 'mobile' ? (mobileCategory === 'apps' ? 'aplikácie' : 'hry') : 'hry'} (+40)</span>
+                          <span className="opacity-60 text-[10px]">
+                            (Zobrazené {visibleCount} z {totalGamesCount})
+                          </span>
                         </button>
                       </div>
                     )}

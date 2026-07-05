@@ -27,6 +27,7 @@ export interface Game {
   genres: string[];
   steamId?: string;
   coverUrl: string;
+  logoUrl?: string;
   size: string;
   version: string;
   requirements: Requirements;
