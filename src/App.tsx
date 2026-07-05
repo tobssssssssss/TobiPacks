@@ -25,7 +25,8 @@ import {
   Info,
   Clock,
   ExternalLink,
-  Smartphone
+  Smartphone,
+  X
 } from 'lucide-react';
 import { Game, GameRequest, Comment, FAQItem } from './types';
 import { ALL_GAMES_CATALOG, MOBILE_GAMES_CATALOG, MOBILE_APPS_CATALOG, FAQ_ITEMS, GENRES_LIST, TOBIPACK_INDEX_PRESETS, getSteamCoverUrl, findSteamAppId, getGenresForGame, getRealisticSizeForGame } from './gamesData';
@@ -83,6 +84,12 @@ export default function App() {
   useEffect(() => {
     setVisibleCount(40);
   }, [searchQuery]);
+
+  // Download Modal States
+  const [showDownloadModal, setShowDownloadModal] = useState<Game | null>(null);
+  const [downloadConsent1, setDownloadConsent1] = useState(false);
+  const [downloadConsent2, setDownloadConsent2] = useState(false);
+  const [downloadSelectedOption, setDownloadSelectedOption] = useState<'automatic' | 'mirrors'>('automatic');
 
   const [requests, setRequests] = useState<GameRequest[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -1380,7 +1387,12 @@ exit`;
                           return (
                             <button
                               key={idx}
-                              onClick={() => handleDownloadGame(selectedGame)}
+                              onClick={() => {
+                                setDownloadConsent1(false);
+                                setDownloadConsent2(false);
+                                setDownloadSelectedOption('automatic');
+                                setShowDownloadModal(selectedGame);
+                              }}
                               className="w-full text-left flex items-center justify-between p-3.5 rounded bg-[#131620] border border-[#202535] hover:border-[#a4f21d] hover:bg-[#181d2c] transition-all group cursor-pointer focus:outline-none"
                             >
                               <div className="flex items-center gap-3">
@@ -2295,6 +2307,297 @@ exit`;
           </div>
         </div>
       </footer>
+
+      {/* TobiPack Safe Downloader Modal / Pop-up */}
+      <AnimatePresence>
+        {showDownloadModal && (
+          <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-[150] flex items-center justify-center p-4 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className={`relative w-full max-w-2xl bg-[#090b11] border rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto ${
+                platform === 'mobile' ? 'border-cyan-500/20 shadow-cyan-950/20' : 'border-[#a4f21d]/20 shadow-lime-950/20'
+              }`}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowDownloadModal(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-[#131622] text-slate-400 hover:text-white transition-colors cursor-pointer border border-slate-800/40"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Header Safety Banner */}
+              <div className="flex flex-col md:flex-row items-center gap-5 pb-5 border-b border-[#181c2b]">
+                <div className="relative">
+                  <img
+                    src={showDownloadModal.logoUrl || showDownloadModal.coverUrl}
+                    alt={showDownloadModal.name}
+                    className="w-20 h-28 object-cover rounded-lg border border-[#1e2335] shadow-lg"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center shadow-md ${
+                    platform === 'mobile' ? 'bg-cyan-500 text-black' : 'bg-[#a4f21d] text-black'
+                  }`}>
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                </div>
+
+                <div className="text-center md:text-left flex-1 min-w-0 space-y-1.5">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded tracking-widest uppercase ${
+                      platform === 'mobile' ? 'bg-cyan-500/10 text-cyan-400' : 'bg-[#a4f21d]/10 text-[#a4f21d]'
+                    }`}>
+                      {platform === 'mobile' ? 'Mobilný Mod' : 'PC Pre-Installed'}
+                    </span>
+                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded tracking-widest uppercase bg-emerald-500/10 text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Bezpečné stiahnutie
+                    </span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight truncate">
+                    {showDownloadModal.name}
+                  </h2>
+                  <p className="text-xs text-slate-400 font-mono">
+                    Verzia: <span className="text-white font-bold">{showDownloadModal.version}</span> • 
+                    Veľkosť: <span className="text-white font-bold">{showDownloadModal.size}</span> • 
+                    Vývojár: <span className="text-slate-300">{showDownloadModal.developer}</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Tab Selector: Automatic vs Mirrors */}
+              <div className="grid grid-cols-2 gap-2 bg-[#10131e] p-1 rounded-xl border border-slate-800/40">
+                <button
+                  onClick={() => setDownloadSelectedOption('automatic')}
+                  className={`py-2.5 px-3 rounded-lg text-xs font-bold font-mono transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    downloadSelectedOption === 'automatic'
+                      ? platform === 'mobile'
+                        ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-950/20'
+                        : 'bg-[#a4f21d] text-black shadow-lg shadow-lime-950/20'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/20'
+                  }`}
+                >
+                  <Cpu className="w-4 h-4" />
+                  <span>Automatický Sťahovač</span>
+                </button>
+                <button
+                  onClick={() => setDownloadSelectedOption('mirrors')}
+                  className={`py-2.5 px-3 rounded-lg text-xs font-bold font-mono transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    downloadSelectedOption === 'mirrors'
+                      ? platform === 'mobile'
+                        ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-950/20'
+                        : 'bg-[#a4f21d] text-black shadow-lg shadow-lime-950/20'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/20'
+                  }`}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Sťahovacie Zrkadlá ({showDownloadModal.downloadLinks?.length || 1})</span>
+                </button>
+              </div>
+
+              {/* Tab Content 1: Automatic high-fidelity downloader */}
+              {downloadSelectedOption === 'automatic' && (
+                <div className="space-y-4">
+                  <div className="bg-[#0f121d] p-4 rounded-xl border border-slate-800/60 text-xs text-slate-300 leading-relaxed space-y-2">
+                    <p className="font-semibold text-white flex items-center gap-1.5">
+                      <Info className={`w-4 h-4 ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} />
+                      <span>Ako funguje automatické sťahovanie cez vašu doménu?</span>
+                    </p>
+                    <p>
+                      {platform === 'mobile' ? (
+                        'Náš systém pripraví priamy odkaz na sťahovanie modifikovaného APK/IPA balíčka so všetkými výhodami a odomknutým prémiovým obsahom. Sťahovanie prebehne okamžite s maximálnou priepustnosťou vašej linky.'
+                      ) : (
+                        'Náš prehliadačový kompilátor zostaví bezpečný .ZIP balíček na mieru pre váš PC. Archív bude obsahovať spúšťacie súbory hry, náš oficiálny antivírusový aktivátor výnimiek "vipnut.bat" a podrobný slovenský návod "tobisnavod.txt". Všetko prebehne 100% lokálne vo vašom prehliadači.'
+                      )}
+                    </p>
+                  </div>
+
+                  {/* Safety requirements checklist */}
+                  <div className="space-y-2.5 bg-[#10131e]/50 p-4 rounded-xl border border-[#1b1f2e] transition-all">
+                    <h4 className="text-xs font-bold font-mono text-slate-400 uppercase tracking-wider mb-1">
+                      Bezpečnostné overenie pred spustením:
+                    </h4>
+
+                    {/* Checkbox 1 */}
+                    <label className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-800/15 cursor-pointer group transition-colors">
+                      <input
+                        type="checkbox"
+                        checked={downloadConsent1}
+                        onChange={(e) => setDownloadConsent1(e.target.checked)}
+                        className={`w-4 h-4 mt-0.5 rounded accent-emerald-500 cursor-pointer ${
+                          platform === 'mobile' ? 'focus:ring-cyan-500' : 'focus:ring-[#a4f21d]'
+                        }`}
+                      />
+                      <div className="text-xs leading-relaxed select-none">
+                        <span className="text-slate-200 group-hover:text-white transition-colors font-medium">
+                          {platform === 'mobile' 
+                            ? 'Súhlasím s povolením inštalácie z neznámych zdrojov vo svojom mobile' 
+                            : 'Rozumiem, že pred extrahovaním musím vypnúť Windows Defender alebo spustiť súbor "vipnut.bat"'}
+                        </span>
+                        <p className="text-[10px] text-slate-500">
+                          {platform === 'mobile' 
+                            ? 'Upravené aplikácie a mody vyžadujú povolenie "Neznáme zdroje" v systéme Android/iOS.' 
+                            : 'Antivírus môže omylom vyhodnotiť herný crack za hrozbu (tzv. False Positive) a vymazať ho.'}
+                        </p>
+                      </div>
+                    </label>
+
+                    {/* Checkbox 2 */}
+                    <label className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-800/15 cursor-pointer group transition-colors">
+                      <input
+                        type="checkbox"
+                        checked={downloadConsent2}
+                        onChange={(e) => setDownloadConsent2(e.target.checked)}
+                        className={`w-4 h-4 mt-0.5 rounded accent-emerald-500 cursor-pointer ${
+                          platform === 'mobile' ? 'focus:ring-cyan-500' : 'focus:ring-[#a4f21d]'
+                        }`}
+                      />
+                      <div className="text-xs leading-relaxed select-none">
+                        <span className="text-slate-200 group-hover:text-white transition-colors font-medium">
+                          {platform === 'mobile' 
+                            ? 'Súhlasím, že sťahujem modifikáciu APK/IPA úplne na vlastné riziko bez vírusov' 
+                            : 'Súhlasím, že budem mať na pozadí zapnutú aplikáciu Steam pre overenie knižníc'}
+                        </span>
+                        <p className="text-[10px] text-slate-500">
+                          {platform === 'mobile' 
+                            ? 'Aplikácia bola otestovaná na malware, no mobilné systémy môžu zobraziť výstrahu.' 
+                            : 'TobiPack pre-cracked hry vyžadujú bežiacu službu Steam, aby emulovali správne API.'}
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* Packaging progress if running */}
+                  {downloadingGameId === showDownloadModal.id ? (
+                    <div className="bg-[#121623] border border-[#a4f21d]/30 rounded-xl p-5 text-center space-y-4">
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="text-slate-400">Pripravujem TobiPack inštalačný balíček...</span>
+                        <span className="text-[#a4f21d] font-bold">{downloadProgress}%</span>
+                      </div>
+                      
+                      <div className="w-full h-2.5 bg-[#1b1f2e] rounded-full overflow-hidden relative border border-[#23283a]">
+                        <div 
+                          className={`h-full bg-gradient-to-r rounded-full transition-all duration-300 ${
+                            platform === 'mobile' ? 'from-cyan-500 to-teal-400' : 'from-[#a4f21d] to-[#bbfd53]'
+                          }`}
+                          style={{ width: `${downloadProgress}%` }}
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-2 justify-center text-[11px] text-slate-500 font-mono">
+                        <Loader2 className={`w-3.5 h-3.5 animate-spin ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} />
+                        <span>Balenie súborov, návodov a aktivátora...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={async () => {
+                        if (!downloadConsent1 || !downloadConsent2) {
+                          alert('Pre stiahnutie musíte najskôr potvrdiť oba bezpečnostné súhlasy kliknutím na políčka.');
+                          return;
+                        }
+                        await handleDownloadGame(showDownloadModal);
+                        // Close modal after finishing if it's mobile or fast, otherwise let progress finish
+                        if (platform === 'mobile') {
+                          setShowDownloadModal(null);
+                        }
+                      }}
+                      className={`w-full py-4 rounded-xl text-xs font-bold font-mono transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
+                        downloadConsent1 && downloadConsent2
+                          ? platform === 'mobile'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-black hover:shadow-cyan-500/20 active:scale-[0.98]'
+                            : 'bg-gradient-to-r from-[#a4f21d] to-[#bbfd53] text-black hover:shadow-lime-500/20 active:scale-[0.98]'
+                          : 'bg-slate-800 text-slate-500 cursor-not-allowed opacity-60'
+                      }`}
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>
+                        {downloadConsent1 && downloadConsent2 
+                          ? `STIAHNUŤ CEZ TÚTO DOMÉNU (${showDownloadModal.size})` 
+                          : 'POTVRĎTE SÚHLASY PRE STIAHNUTIE'}
+                      </span>
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {/* Tab Content 2: Raw / Original mirrors */}
+              {downloadSelectedOption === 'mirrors' && (
+                <div className="space-y-4">
+                  <div className="bg-[#0f121d] p-4 rounded-xl border border-slate-800/60 text-xs text-slate-300 leading-relaxed space-y-2">
+                    <p className="font-semibold text-white flex items-center gap-1.5">
+                      <ExternalLink className={`w-4 h-4 ${platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'}`} />
+                      <span>Stiahnuť surové inštalačné balíky z high-speed serverov</span>
+                    </p>
+                    <p>
+                      Môžete sťahovať hry a aplikácie priamo bez balenia do TobiPack ZIPu. Tieto linky smerujú na externé dedikované servery pre maximálnu rýchlosť.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {showDownloadModal.downloadLinks && showDownloadModal.downloadLinks.length > 0 ? (
+                      showDownloadModal.downloadLinks.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => {
+                            // Close modal on link click to keep user flow happy
+                            setTimeout(() => setShowDownloadModal(null), 100);
+                          }}
+                          className="flex items-center justify-between p-4 rounded-xl bg-[#10131e] border border-slate-800 hover:border-slate-700 hover:bg-[#151928] transition-all group"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${
+                              platform === 'mobile' ? 'bg-cyan-500/10 text-cyan-400' : 'bg-[#a4f21d]/10 text-[#a4f21d]'
+                            }`}>
+                              {idx + 1}
+                            </div>
+                            <div>
+                              <span className="text-xs font-bold text-slate-100 group-hover:text-white transition-colors block">
+                                {link.name}
+                              </span>
+                              <span className="text-[10px] text-emerald-400 font-mono">
+                                Direct High-Speed Mirror
+                              </span>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-[10px] text-slate-500 font-mono block">
+                              {link.size || showDownloadModal.size}
+                            </span>
+                            <span className={`text-[10px] font-bold font-mono flex items-center gap-0.5 justify-end ${
+                              platform === 'mobile' ? 'text-cyan-400' : 'text-[#a4f21d]'
+                            }`}>
+                              MIRROR <ExternalLink className="w-2.5 h-2.5" />
+                            </span>
+                          </div>
+                        </a>
+                      ))
+                    ) : (
+                      <div className="col-span-2 text-center py-6 text-slate-500 font-mono text-xs">
+                        Žiadne priame zrkadlá neboli nájdené pre tento titul.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Security Alert Footnote */}
+              <div className="bg-[#18110e] p-3 rounded-lg border border-amber-950/40 text-[10px] text-slate-400 leading-normal flex items-start gap-2.5">
+                <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <p>
+                  <strong>Dôležité upozornenie:</strong> Všetky súbory v katalógu TobiPack sú dôkladne kontrolované cez automatické sandbox prostredia a nepodliehajú vírusom. Kvôli herným crackom však môžu vyvolať planý poplach vo vašom antivíruse (False Positive). Vždy postupujte podľa pribaleného návodu.
+                </p>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
